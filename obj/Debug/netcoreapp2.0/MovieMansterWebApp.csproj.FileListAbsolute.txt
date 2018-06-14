@@ -1,0 +1,11 @@
+C:\Users\daniel\source\repos\MovieMansterWebApp\MovieMansterWebApp\bin\Debug\netcoreapp2.0\MovieMansterWebApp.deps.json
+C:\Users\daniel\source\repos\MovieMansterWebApp\MovieMansterWebApp\bin\Debug\netcoreapp2.0\MovieMansterWebApp.runtimeconfig.json
+C:\Users\daniel\source\repos\MovieMansterWebApp\MovieMansterWebApp\bin\Debug\netcoreapp2.0\MovieMansterWebApp.runtimeconfig.dev.json
+C:\Users\daniel\source\repos\MovieMansterWebApp\MovieMansterWebApp\bin\Debug\netcoreapp2.0\MovieMansterWebApp.dll
+C:\Users\daniel\source\repos\MovieMansterWebApp\MovieMansterWebApp\bin\Debug\netcoreapp2.0\MovieMansterWebApp.pdb
+C:\Users\daniel\source\repos\MovieMansterWebApp\MovieMansterWebApp\obj\Debug\netcoreapp2.0\MovieMansterWebApp.csproj.CoreCompileInputs.cache
+C:\Users\daniel\source\repos\MovieMansterWebApp\MovieMansterWebApp\obj\Debug\netcoreapp2.0\MovieMansterWebApp.AssemblyInfoInputs.cache
+C:\Users\daniel\source\repos\MovieMansterWebApp\MovieMansterWebApp\obj\Debug\netcoreapp2.0\MovieMansterWebApp.AssemblyInfo.cs
+C:\Users\daniel\source\repos\MovieMansterWebApp\MovieMansterWebApp\obj\Debug\netcoreapp2.0\MovieMansterWebApp.dll
+C:\Users\daniel\source\repos\MovieMansterWebApp\MovieMansterWebApp\obj\Debug\netcoreapp2.0\MovieMansterWebApp.pdb
+C:\Users\daniel\source\repos\MovieMansterWebApp\MovieMansterWebApp\obj\Debug\netcoreapp2.0\MovieMansterWebApp.csprojResolveAssemblyReference.cache
