@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MovieMansterWebApp.Models;
 
-namespace MovieMansterWebApp.Controllers
+namespace MovieMonsterWebApp.Controllers
 {
     public class SalesController : Controller
     {
@@ -25,7 +25,7 @@ namespace MovieMansterWebApp.Controllers
         }
 
         // GET: Sales/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(string id)
         {
             if (id == null)
             {
@@ -54,20 +54,21 @@ namespace MovieMansterWebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SaleID,CustomerID,CustomerID,Purchased,TotalPrice")] Sale sale)
+        public async Task<IActionResult> Create([Bind("SaleID,CustomerID,Purchased,TotalPrice")] Sale sale)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(sale);
                 await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CustomerID"] = new SelectList(_context.Customer, "CustomerID", "CustomerID");
+            ViewData["CustomerID"] = new SelectList(_context.Customer, "CustomerID", "CustomerID", sale.CustomerID);
             return View(sale);
         }
 
         // GET: Sales/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
             {
@@ -87,7 +88,7 @@ namespace MovieMansterWebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("SaleID,CustomerID,Purchased,TotalPrice")] Sale sale)
+        public async Task<IActionResult> Edit(string id, [Bind("SaleID,CustomerID,Purchased,TotalPrice")] Sale sale)
         {
             if (id != sale.SaleID)
             {
@@ -118,7 +119,7 @@ namespace MovieMansterWebApp.Controllers
         }
 
         // GET: Sales/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
             {
@@ -146,7 +147,7 @@ namespace MovieMansterWebApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool SaleExists(int id)
+        private bool SaleExists(string id)
         {
             return _context.Sale.Any(e => e.SaleID == id);
         }

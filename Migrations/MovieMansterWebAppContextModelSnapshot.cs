@@ -61,7 +61,7 @@ namespace MovieMansterWebApp.Migrations
 
                     b.Property<DateTime>("ReleaseDate");
 
-                    b.Property<int?>("SaleID");
+                    b.Property<string>("SaleID");
 
                     b.Property<int?>("StockOrderID");
 
@@ -80,13 +80,10 @@ namespace MovieMansterWebApp.Migrations
 
             modelBuilder.Entity("MovieMansterWebApp.Models.Sale", b =>
                 {
-                    b.Property<int>("SaleID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("SaleID")
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<int>("CustomerID");
-
-                    b.Property<string>("CustomerID1");
+                    b.Property<string>("CustomerID");
 
                     b.Property<bool>("Purchased");
 
@@ -94,7 +91,7 @@ namespace MovieMansterWebApp.Migrations
 
                     b.HasKey("SaleID");
 
-                    b.HasIndex("CustomerID1");
+                    b.HasIndex("CustomerID");
 
                     b.ToTable("Sale");
                 });
@@ -191,7 +188,7 @@ namespace MovieMansterWebApp.Migrations
                 {
                     b.HasOne("MovieMansterWebApp.Models.Customer", "Customer")
                         .WithMany("Sales")
-                        .HasForeignKey("CustomerID1");
+                        .HasForeignKey("CustomerID");
                 });
 
             modelBuilder.Entity("MovieMansterWebApp.Models.StockOrder", b =>

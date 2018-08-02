@@ -52,3 +52,4 @@ C:\Users\daniel\source\repos\MovieMansterWebApp\MovieMansterWebApp\obj\Debug\net
 C:\Users\daniel\source\repos\MovieMansterWebApp\MovieMansterWebApp\obj\Debug\netcoreapp2.1\MovieMansterWebApp.dll
 C:\Users\daniel\source\repos\MovieMansterWebApp\MovieMansterWebApp\obj\Debug\netcoreapp2.1\MovieMansterWebApp.pdb
 C:\Users\daniel\source\repos\MovieMansterWebApp\MovieMansterWebApp\obj\Debug\netcoreapp2.1\MovieMansterWebApp.csproj.CopyComplete
+C:\Users\daniel\source\repos\MovieMansterWebApp\MovieMansterWebApp\obj\Debug\netcoreapp2.1\MovieMansterWebApp.csprojAssemblyReference.cache

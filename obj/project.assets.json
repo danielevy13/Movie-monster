@@ -14302,9 +14302,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\daniel\\source\\repos\\MovieMansterWebApp\\MovieMansterWebApp\\MovieMansterWebApp.csproj",
-      "projectName": "MovieMansterWebApp",
-      "projectPath": "C:\\Users\\daniel\\source\\repos\\MovieMansterWebApp\\MovieMansterWebApp\\MovieMansterWebApp.csproj",
+      "projectUniqueName": "C:\\Users\\daniel\\source\\repos\\MovieMansterWebApp\\MovieMansterWebApp\\MovieMonsterWebApp.csproj",
+      "projectName": "MovieMonsterWebApp",
+      "projectPath": "C:\\Users\\daniel\\source\\repos\\MovieMansterWebApp\\MovieMansterWebApp\\MovieMonsterWebApp.csproj",
       "packagesPath": "C:\\Users\\daniel\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\daniel\\source\\repos\\MovieMansterWebApp\\MovieMansterWebApp\\obj\\",
       "projectStyle": "PackageReference",

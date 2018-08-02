@@ -48,7 +48,7 @@ namespace MovieMansterWebApp
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Sales}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
