@@ -157,6 +157,23 @@ namespace MovieMonste.Controllers
         }
 
         /******************MyFunctions*******************/
+        /*
+        // GET: Sales/Edit/5
+        public async Task<IActionResult> AddMovieToCart(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var sale = await _context.Sale.FindAsync(id);
+            if (sale == null)
+            {
+                return NotFound();
+            }
+            ViewData["MovieID"] = new SelectList(_context.Movie, "MovieID", "MovieID");
+            return View(sale);
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -178,4 +195,5 @@ namespace MovieMonste.Controllers
         }
 
     }
+    */
 }
