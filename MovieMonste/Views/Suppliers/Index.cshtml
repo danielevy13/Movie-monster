@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MovieMansterWebApp.Models.Supplier>
+﻿@model IEnumerable<MovieMonste.Models.Supplier>
 
 @{
     ViewData["Title"] = "Index";
@@ -21,6 +21,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.MailAddress)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SupplierAddress)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -35,6 +38,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.MailAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SupplierAddress)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.SupplierID">Edit</a> |

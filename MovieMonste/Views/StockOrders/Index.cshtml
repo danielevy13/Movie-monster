@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MovieMansterWebApp.Models.StockOrder>
+﻿@model IEnumerable<MovieMonste.Models.StockOrder>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,10 +13,13 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.Supplier)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.TotalPrice)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Supplier)
+                @Html.DisplayNameFor(model => model.Movies)
             </th>
             <th></th>
         </tr>
@@ -25,10 +28,13 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.Supplier.Name)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.TotalPrice)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Supplier.SupplierID)
+               @*place for movies*@
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.StockOrderID">Edit</a> |

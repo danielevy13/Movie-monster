@@ -193,7 +193,7 @@ namespace MovieMonste.Controllers
             sale.Movies.Add(movie);
             return View();
         }
-
+*/
     }
-    */
+    
 }

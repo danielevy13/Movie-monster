@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MovieMansterWebApp.Models.Sale>
+﻿@model IEnumerable<MovieMonste.Models.Sale>
 
 @{
     ViewData["Title"] = "Index";
@@ -49,7 +49,7 @@
                 <a asp-action="Edit" asp-route-id="@item.SaleID">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.SaleID">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.SaleID">Delete</a>
-                <a asp-action="AddMovieToCart" asp-route-id="@item.SaleID">AddMovie</a>
+              @*  <a asp-action="AddMovieToCart" asp-route-id="@item.SaleID">AddMovie</a>*@
             </td>
         </tr>
 }

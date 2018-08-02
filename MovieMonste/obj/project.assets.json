@@ -12230,11 +12230,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\המסלול האקדמי המכללה למנהל\\שנה ב\\סמסטר ב\\פיתוח אפליקציות אינטרנטיות\\פרויקט\\MovieMonste\\MovieMonste\\MovieMonste.csproj",
+      "projectUniqueName": "C:\\Users\\daniel\\Documents\\GitHub\\Movie-Monster-old\\MovieMonste\\MovieMonste.csproj",
       "projectName": "MovieMonste",
-      "projectPath": "D:\\המסלול האקדמי המכללה למנהל\\שנה ב\\סמסטר ב\\פיתוח אפליקציות אינטרנטיות\\פרויקט\\MovieMonste\\MovieMonste\\MovieMonste.csproj",
+      "projectPath": "C:\\Users\\daniel\\Documents\\GitHub\\Movie-Monster-old\\MovieMonste\\MovieMonste.csproj",
       "packagesPath": "C:\\Users\\daniel\\.nuget\\packages\\",
-      "outputPath": "D:\\המסלול האקדמי המכללה למנהל\\שנה ב\\סמסטר ב\\פיתוח אפליקציות אינטרנטיות\\פרויקט\\MovieMonste\\MovieMonste\\obj\\",
+      "outputPath": "C:\\Users\\daniel\\Documents\\GitHub\\Movie-Monster-old\\MovieMonste\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

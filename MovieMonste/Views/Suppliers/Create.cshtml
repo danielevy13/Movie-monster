@@ -1,4 +1,4 @@
-﻿@model MovieMansterWebApp.Models.Supplier
+﻿@model MovieMonste.Models.Supplier
 
 @{
     ViewData["Title"] = "Create";
@@ -26,6 +26,31 @@
                 <label asp-for="MailAddress" class="control-label"></label>
                 <input asp-for="MailAddress" class="form-control" />
                 <span asp-validation-for="MailAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SupplierAddress.State" class="control-label"></label>
+                <input asp-for="SupplierAddress.State" class="form-control" />
+                <span asp-validation-for="SupplierAddress.State" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SupplierAddress.City" class="control-label"></label>
+                <input asp-for="SupplierAddress.City" class="form-control" />
+                <span asp-validation-for="SupplierAddress.City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SupplierAddress.StreetName" class="control-label"></label>
+                <input asp-for="SupplierAddress.StreetName" class="form-control" />
+                <span asp-validation-for="SupplierAddress.StreetName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SupplierAddress.ZipCode" class="control-label"></label>
+                <input asp-for="SupplierAddress.ZipCode" class="form-control" />
+                <span asp-validation-for="SupplierAddress.ZipCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SupplierAddress.ApartmentNumber" class="control-label"></label>
+                <input asp-for="SupplierAddress.ApartmentNumber" class="form-control" />
+                <span asp-validation-for="SupplierAddress.ApartmentNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />

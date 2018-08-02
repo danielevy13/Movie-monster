@@ -53,7 +53,7 @@ namespace MovieMonste.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SupplierID,Name,PhoneNumber,MailAddress")] Supplier supplier)
+        public async Task<IActionResult> Create([Bind("SupplierID,Name,PhoneNumber,MailAddress,SupplierAddress")] Supplier supplier)
         {
             if (ModelState.IsValid)
             {
