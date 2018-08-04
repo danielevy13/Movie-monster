@@ -9,10 +9,6 @@ namespace MovieMonste.Models
 {
     public class Movie
     {
-        //public Movie(Sale[] sale)
-        //{
-        //    this.Sales = new HashSet<Sale>(sale);
-        //}
         public string MovieID { get; set; }
         public string Title { get; set; }
         public string Genere { get; set; }

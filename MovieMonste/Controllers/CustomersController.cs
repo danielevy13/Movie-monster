@@ -21,7 +21,12 @@ namespace MovieMonste.Controllers
         // GET: Customers
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Customer.ToListAsync());
+            var customers = _context.Customer.Include(u => u.Sales);   // Include all virtuals (one or ICollections /// one or many) 
+            if (customers == null)
+            {
+                return View(await _context.Customer.ToListAsync());
+            }
+            return View(customers);
         }
 
         // GET: Customers/Details/5

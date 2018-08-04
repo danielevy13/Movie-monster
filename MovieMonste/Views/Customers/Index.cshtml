@@ -36,6 +36,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.CustomerAddress)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sales)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -66,6 +69,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.CustomerAddress)
             </td>
+            <td>
+                @foreach (var sale in item.Sales) {
+                    @Html.DisplayFor(itemSale => sale.TotalPrice)
+                   <br /> 
+                }
+           </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.CustomerID">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.CustomerID">Details</a> |

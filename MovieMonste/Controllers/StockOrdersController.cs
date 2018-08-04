@@ -21,7 +21,7 @@ namespace MovieMonste.Controllers
         // GET: StockOrders
         public async Task<IActionResult> Index()
         {
-            var movieMonsteContext = _context.StockOrder.Include(s => s.Supplier);
+            var movieMonsteContext = _context.StockOrder.Include(s => s.Supplier).Include(m=>m.Movies);
             return View(await movieMonsteContext.ToListAsync());
         }
 

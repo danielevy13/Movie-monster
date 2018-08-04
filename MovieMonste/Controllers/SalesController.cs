@@ -21,7 +21,7 @@ namespace MovieMonste.Controllers
         // GET: Sales
         public async Task<IActionResult> Index()
         {
-            var movieMonsteContext = _context.Sale.Include(s => s.Customer);
+            var movieMonsteContext = _context.Sale.Include(s => s.Customer).Include(m=>m.Movies);
             return View(await movieMonsteContext.ToListAsync());
         }
 
@@ -61,6 +61,7 @@ namespace MovieMonste.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(sale);
+            //    _context.Customer.
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -157,8 +158,8 @@ namespace MovieMonste.Controllers
         }
 
         /******************MyFunctions*******************/
-        /*
-        // GET: Sales/Edit/5
+
+        // GET: Sales/AddMovieToCart/5
         public async Task<IActionResult> AddMovieToCart(string id)
         {
             if (id == null)
@@ -174,7 +175,7 @@ namespace MovieMonste.Controllers
             ViewData["MovieID"] = new SelectList(_context.Movie, "MovieID", "MovieID");
             return View(sale);
         }
-
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddMovieToCart(string saleID, string movieID)
@@ -189,11 +190,19 @@ namespace MovieMonste.Controllers
             {
                 return NotFound();
             }
+            if (movieID == null)
+            {
+                return NotFound();
+            }
             var movie = await _context.Movie.FindAsync(movieID);
+            if (movie == null)
+            {
+                return NotFound();
+            }
             sale.Movies.Add(movie);
             return View();
         }
-*/
+        
     }
     
 }
