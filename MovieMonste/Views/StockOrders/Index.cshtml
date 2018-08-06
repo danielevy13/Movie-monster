@@ -36,6 +36,7 @@
             <td>
                 @foreach (var movie in item.Movies)
                 {
+                    @* include Movie from MovieStockOrder *@
                     @Html.DisplayFor(itemMovie => movie.Movie.Title)
                     <br />
                 }

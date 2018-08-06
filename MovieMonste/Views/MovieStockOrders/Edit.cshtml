@@ -12,6 +12,7 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @* send specific StockOrderID and MovieID for Edit  *@
             <input type="hidden" asp-for="StockOrderID" />
             <input type="hidden" asp-for="MovieID" />
             <div class="form-group">

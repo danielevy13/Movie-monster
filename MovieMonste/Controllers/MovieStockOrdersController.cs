@@ -28,6 +28,7 @@ namespace MovieMonste.Controllers
             return View(await movieMonsteContext.ToListAsync());
         }
 
+        //all function need the key getting 2 primary Key
         // GET: MovieStockOrders/Details/5
         public async Task<IActionResult> Details(string StockOrderID,string MovieID)
         {

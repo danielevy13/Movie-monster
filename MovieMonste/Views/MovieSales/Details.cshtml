@@ -25,6 +25,7 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new {SaleID=Model.SaleID,MovieID=Model.MovieID}) |
+    @* text link for Edit send 2 primary key*@
+    @Html.ActionLink("Edit", "Edit", new { SaleID = Model.SaleID, MovieID = Model.MovieID }) |
     <a asp-action="Index">Back to List</a>
 </div>

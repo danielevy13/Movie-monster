@@ -21,6 +21,7 @@ namespace MovieMonste.Controllers
         // GET: Sales
         public async Task<IActionResult> Index()
         {
+            // include Movies from MovieSale(Movies)
             var movieMonsteContext = _context.Sale.Include(s => s.Customer).Include(ms=>ms.Movies).Include("Movies.Movie");
             return View(await movieMonsteContext.ToListAsync());
         }

@@ -37,7 +37,8 @@
                 @Html.DisplayFor(modelItem => item.Quantity)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { MovieID=item.MovieID, StockOrderID = item.StockOrderID}) |
+                @*3 text link for Edit, Details and Delete send to functions 2 primary key*@
+                @Html.ActionLink("Edit", "Edit", new { MovieID = item.MovieID, StockOrderID = item.StockOrderID }) |
                 @Html.ActionLink("Details", "Details", new { MovieID = item.MovieID, StockOrderID = item.StockOrderID }) |
                 @Html.ActionLink("Delete", "Delete", new { MovieID = item.MovieID, StockOrderID = item.StockOrderID })
             </td>

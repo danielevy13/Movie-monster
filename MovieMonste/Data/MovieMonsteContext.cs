@@ -17,33 +17,10 @@ namespace MovieMonste.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<MovieSale>().HasKey(ms => new { ms.MovieID, ms.SaleID });
-            modelBuilder.Entity<MovieStockOrder>().HasKey(ms => new { ms.MovieID, ms.StockOrderID});
+            modelBuilder.Entity<MovieSale>().HasKey(ms => new { ms.MovieID, ms.SaleID });// config 2 primery key for MovieSale
+            modelBuilder.Entity<MovieStockOrder>().HasKey(ms => new { ms.MovieID, ms.StockOrderID});// config 2 primery key for MovieStockOrder
         }
-        /*
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Sale>(e =>
-                e.HasOne(r => r.Customer).WithMany(c => c.Sales)
-            );
-        }
-                protected override void OnModelCreating(ModelBuilder modelBuilder)
-                {
-
-                    modelBuilder.Entity<Sale>()
-                                .HasMany<Movie>(m => m.Movie)
-                                .WithMany(s => s.Sale)
-                                .Map(cs =>
-                                {
-                                    cs.MapLeftKey("SaleId");
-                                    cs.MapRightKey("MovieId");
-                                    cs.ToTable("SaleMovies");
-                                });
-
-                }
-                */
         public DbSet<Customer> Customer { get; set; }
 
         public DbSet<Movie> Movie { get; set; }
