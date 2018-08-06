@@ -1,4 +1,7 @@
-﻿using System;
+﻿/*
+  MovieSales work with 2 primary key and need get 2 keys for questions(del,edit...)
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -26,9 +29,9 @@ namespace MovieMonste.Controllers
         }
 
         // GET: MovieSales/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(string SaleID , string MovieID)
         {
-            if (id == null)
+            if (SaleID == null || MovieID==null)
             {
                 return NotFound();
             }
@@ -36,7 +39,7 @@ namespace MovieMonste.Controllers
             var movieSale = await _context.MovieSale
                 .Include(m => m.Movie)
                 .Include(m => m.Sale)
-                .FirstOrDefaultAsync(m => m.MovieID == id);
+                .FirstOrDefaultAsync(m => m.MovieID == MovieID && m.SaleID==SaleID);
             if (movieSale == null)
             {
                 return NotFound();
@@ -48,8 +51,8 @@ namespace MovieMonste.Controllers
         // GET: MovieSales/Create
         public IActionResult Create()
         {
-            ViewData["MovieID"] = new SelectList(_context.Movie, "MovieID", "MovieID");
             ViewData["SaleID"] = new SelectList(_context.Sale, "SaleID", "SaleID");
+            ViewData["MovieID"] = new SelectList(_context.Movie, "MovieID", "MovieID");
             return View();
         }
 
@@ -58,26 +61,53 @@ namespace MovieMonste.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SaleID,MovieID")] MovieSale movieSale)
+        public async Task<IActionResult> Create(string SaleID, string MovieID, [Bind("SaleID,MovieID,Quantity")] MovieSale movieSale)
         {
+            if (SaleID == null || MovieID == null)
+            {
+                return NotFound();
+            }
+
             if (ModelState.IsValid)
             {
-                _context.Add(movieSale);
-                await _context.SaveChangesAsync();
+                if (!MovieSaleExists(SaleID, MovieID))
+                {
+                    _context.Add(movieSale);
+                    await _context.SaveChangesAsync();
+                }
+                else
+                {
+                    try
+                    {
+                        _context.Update(movieSale);
+                        await _context.SaveChangesAsync();
+                    }
+                    catch (DbUpdateConcurrencyException)
+                    {
+                        if (!MovieSaleExists(movieSale.SaleID, movieSale.MovieID))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
+                    }
+                }
                 return RedirectToAction(nameof(Index));
             }
             return View(movieSale);
         }
 
         // GET: MovieSales/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(string SaleID,string MovieID)
         {
-            if (id == null)
+            if (SaleID == null|| MovieID == null)
             {
                 return NotFound();
             }
 
-            var movieSale = await _context.MovieSale.FindAsync(id);
+            var movieSale = await _context.MovieSale.FindAsync(MovieID, SaleID);
             if (movieSale == null)
             {
                 return NotFound();
@@ -90,9 +120,9 @@ namespace MovieMonste.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("SaleID,MovieID")] MovieSale movieSale)
+        public async Task<IActionResult> Edit(string SaleID, string MovieID, [Bind("SaleID,MovieID,Quantity")] MovieSale movieSale)
         {
-            if (id != movieSale.MovieID)
+            if (MovieID != movieSale.MovieID|| SaleID != movieSale.SaleID)
             {
                 return NotFound();
             }
@@ -106,7 +136,7 @@ namespace MovieMonste.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MovieSaleExists(movieSale.MovieID))
+                    if (!MovieSaleExists(movieSale.SaleID, movieSale.MovieID))
                     {
                         return NotFound();
                     }
@@ -121,9 +151,9 @@ namespace MovieMonste.Controllers
         }
 
         // GET: MovieSales/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(string SaleID, string MovieID)
         {
-            if (id == null)
+            if (SaleID == null || MovieID==null)
             {
                 return NotFound();
             }
@@ -131,7 +161,7 @@ namespace MovieMonste.Controllers
             var movieSale = await _context.MovieSale
                 .Include(m => m.Movie)
                 .Include(m => m.Sale)
-                .FirstOrDefaultAsync(m => m.MovieID == id);
+                .FirstOrDefaultAsync(m => m.MovieID == MovieID&&m.SaleID==SaleID);
             if (movieSale == null)
             {
                 return NotFound();
@@ -143,17 +173,17 @@ namespace MovieMonste.Controllers
         // POST: MovieSales/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(string SaleID, string MovieID)
         {
-            var movieSale = await _context.MovieSale.FindAsync(id);
+            var movieSale = await _context.MovieSale.FindAsync(MovieID, SaleID);
             _context.MovieSale.Remove(movieSale);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool MovieSaleExists(string id)
+        private bool MovieSaleExists(string SaleID,string MovieID)
         {
-            return _context.MovieSale.Any(e => e.MovieID == id);
+            return _context.MovieSale.Any(e => e.MovieID == MovieID && e.SaleID==SaleID);
         }
     }
 }

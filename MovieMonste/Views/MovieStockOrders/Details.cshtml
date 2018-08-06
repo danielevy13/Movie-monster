@@ -14,7 +14,7 @@
             @Html.DisplayNameFor(model => model.Movie)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Movie.MovieID)
+            @Html.DisplayFor(model => model.Movie.Title)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.StockOrder)
@@ -22,9 +22,15 @@
         <dd>
             @Html.DisplayFor(model => model.StockOrder.StockOrderID)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Edit", "Edit", new { MovieID = Model.MovieID, StockOrderID = Model.StockOrderID }) |
     <a asp-action="Index">Back to List</a>
 </div>

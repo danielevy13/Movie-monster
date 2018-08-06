@@ -18,6 +18,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.StockOrder)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -25,15 +28,18 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Movie.MovieID)
+                @Html.DisplayFor(modelItem => item.Movie.Title)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.StockOrder.StockOrderID)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { MovieID=item.MovieID, StockOrderID = item.StockOrderID}) |
+                @Html.ActionLink("Details", "Details", new { MovieID = item.MovieID, StockOrderID = item.StockOrderID }) |
+                @Html.ActionLink("Delete", "Delete", new { MovieID = item.MovieID, StockOrderID = item.StockOrderID })
             </td>
         </tr>
 }

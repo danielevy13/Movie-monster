@@ -18,6 +18,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Movie)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -31,9 +34,12 @@
                 @Html.DisplayFor(modelItem => item.Movie.Title)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { SaleID = item.SaleID, MovieID = item.MovieID }) |
+                @Html.ActionLink("Details", "Details", new { SaleID = item.SaleID, MovieID = item.MovieID }) |
+                @Html.ActionLink("Delete", "Delete", new { SaleID = item.SaleID, MovieID = item.MovieID })
             </td>
         </tr>
 }
