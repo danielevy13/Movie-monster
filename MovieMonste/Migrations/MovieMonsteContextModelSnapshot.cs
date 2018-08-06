@@ -60,21 +60,43 @@ namespace MovieMonste.Migrations
 
                     b.Property<DateTime>("ReleaseDate");
 
-                    b.Property<string>("SaleID");
-
-                    b.Property<string>("StockOrderID");
-
                     b.Property<string>("Title");
 
                     b.Property<int>("UnitsInStock");
 
                     b.HasKey("MovieID");
 
+                    b.ToTable("Movie");
+                });
+
+            modelBuilder.Entity("MovieMonste.Models.MovieSale", b =>
+                {
+                    b.Property<string>("MovieID");
+
+                    b.Property<string>("SaleID");
+
+                    b.Property<int>("Quantity");
+
+                    b.HasKey("MovieID", "SaleID");
+
                     b.HasIndex("SaleID");
+
+                    b.ToTable("MovieSale");
+                });
+
+            modelBuilder.Entity("MovieMonste.Models.MovieStockOrder", b =>
+                {
+                    b.Property<string>("MovieID");
+
+                    b.Property<string>("StockOrderID");
+
+                    b.Property<int>("Quantity");
+
+                    b.HasKey("MovieID", "StockOrderID");
 
                     b.HasIndex("StockOrderID");
 
-                    b.ToTable("Movie");
+                    b.ToTable("MovieStockOrder");
                 });
 
             modelBuilder.Entity("MovieMonste.Models.Sale", b =>
@@ -154,14 +176,6 @@ namespace MovieMonste.Migrations
 
             modelBuilder.Entity("MovieMonste.Models.Movie", b =>
                 {
-                    b.HasOne("MovieMonste.Models.Sale")
-                        .WithMany("Movies")
-                        .HasForeignKey("SaleID");
-
-                    b.HasOne("MovieMonste.Models.StockOrder")
-                        .WithMany("Movies")
-                        .HasForeignKey("StockOrderID");
-
                     b.OwnsOne("MovieMonste.ModelComponent.Price", "UnitPrice", b1 =>
                         {
                             b1.Property<string>("MovieID");
@@ -177,6 +191,32 @@ namespace MovieMonste.Migrations
                                 .HasForeignKey("MovieMonste.ModelComponent.Price", "MovieID")
                                 .OnDelete(DeleteBehavior.Cascade);
                         });
+                });
+
+            modelBuilder.Entity("MovieMonste.Models.MovieSale", b =>
+                {
+                    b.HasOne("MovieMonste.Models.Movie", "Movie")
+                        .WithMany()
+                        .HasForeignKey("MovieID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("MovieMonste.Models.Sale", "Sale")
+                        .WithMany("Movies")
+                        .HasForeignKey("SaleID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("MovieMonste.Models.MovieStockOrder", b =>
+                {
+                    b.HasOne("MovieMonste.Models.Movie", "Movie")
+                        .WithMany()
+                        .HasForeignKey("MovieID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("MovieMonste.Models.StockOrder", "StockOrder")
+                        .WithMany("Movies")
+                        .HasForeignKey("StockOrderID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("MovieMonste.Models.Sale", b =>

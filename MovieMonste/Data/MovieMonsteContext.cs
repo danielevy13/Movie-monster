@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Data;
 using Microsoft.EntityFrameworkCore;
+using MovieMonste.Models;
 
 namespace MovieMonste.Models
 {
@@ -12,6 +13,12 @@ namespace MovieMonste.Models
         public MovieMonsteContext (DbContextOptions<MovieMonsteContext> options)
             : base(options)
         {
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<MovieSale>().HasKey(ms => new { ms.MovieID, ms.SaleID });
+            modelBuilder.Entity<MovieStockOrder>().HasKey(ms => new { ms.MovieID, ms.StockOrderID});
         }
         /*
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -47,6 +54,9 @@ namespace MovieMonste.Models
 
         public DbSet<Supplier> Supplier { get; set; }
 
+        public DbSet<MovieSale> MovieSale { get; set; }
+
+        public DbSet<MovieMonste.Models.MovieStockOrder> MovieStockOrder { get; set; }
 
     }
 }

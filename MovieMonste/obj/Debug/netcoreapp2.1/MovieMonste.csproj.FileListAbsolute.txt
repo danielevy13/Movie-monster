@@ -171,3 +171,13 @@ C:\Users\daniel\Documents\GitHub\Movie-monster\MovieMonste\obj\Debug\netcoreapp2
 C:\Users\daniel\Documents\GitHub\Movie-monster\MovieMonste\obj\Debug\netcoreapp2.1\MovieMonste.dll
 C:\Users\daniel\Documents\GitHub\Movie-monster\MovieMonste\obj\Debug\netcoreapp2.1\MovieMonste.pdb
 C:\Users\daniel\Documents\GitHub\Movie-monster\MovieMonste\obj\Debug\netcoreapp2.1\MovieMonste.csproj.CopyComplete
+C:\Users\daniel\Documents\GitHub\Movie-monster\MovieMonste\obj\Debug\netcoreapp2.1\Razor\Views\MovieSales\Create.g.cshtml.cs
+C:\Users\daniel\Documents\GitHub\Movie-monster\MovieMonste\obj\Debug\netcoreapp2.1\Razor\Views\MovieSales\Delete.g.cshtml.cs
+C:\Users\daniel\Documents\GitHub\Movie-monster\MovieMonste\obj\Debug\netcoreapp2.1\Razor\Views\MovieSales\Details.g.cshtml.cs
+C:\Users\daniel\Documents\GitHub\Movie-monster\MovieMonste\obj\Debug\netcoreapp2.1\Razor\Views\MovieSales\Edit.g.cshtml.cs
+C:\Users\daniel\Documents\GitHub\Movie-monster\MovieMonste\obj\Debug\netcoreapp2.1\Razor\Views\MovieSales\Index.g.cshtml.cs
+C:\Users\daniel\Documents\GitHub\Movie-monster\MovieMonste\obj\Debug\netcoreapp2.1\Razor\Views\MovieStockOrders\Create.g.cshtml.cs
+C:\Users\daniel\Documents\GitHub\Movie-monster\MovieMonste\obj\Debug\netcoreapp2.1\Razor\Views\MovieStockOrders\Delete.g.cshtml.cs
+C:\Users\daniel\Documents\GitHub\Movie-monster\MovieMonste\obj\Debug\netcoreapp2.1\Razor\Views\MovieStockOrders\Details.g.cshtml.cs
+C:\Users\daniel\Documents\GitHub\Movie-monster\MovieMonste\obj\Debug\netcoreapp2.1\Razor\Views\MovieStockOrders\Edit.g.cshtml.cs
+C:\Users\daniel\Documents\GitHub\Movie-monster\MovieMonste\obj\Debug\netcoreapp2.1\Razor\Views\MovieStockOrders\Index.g.cshtml.cs

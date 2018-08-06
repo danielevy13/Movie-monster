@@ -42,7 +42,8 @@
             <td>
                 @foreach (var movie in item.Movies)
                 {
-                    @Html.DisplayFor(itemMovie => movie.Title)
+                    @Html.DisplayFor(itemMovie => movie.Movie.Title)
+                    <br />
                 }
             </td>
             <td>

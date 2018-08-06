@@ -8,15 +8,15 @@ namespace MovieMonste.Models
 {
     public class Sale
     {
-        public Sale()
-        {
-              this.Movies = new LinkedList<Movie>();
-        }
+     //   public Sale()
+     //   {
+     //         this.Movies = new LinkedList<Movie>();
+     //   }
         public string SaleID { get; set; }
         public string CustomerID { get; set; }
         public bool Purchased { get; set; }
         public int TotalPrice { get; set; }
         public virtual Customer Customer { get; set; }
-        public virtual ICollection<Movie> Movies { get; set; }
+        public virtual ICollection<MovieSale> Movies { get; set; }
     }
 }

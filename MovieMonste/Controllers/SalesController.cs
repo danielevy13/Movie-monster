@@ -21,7 +21,7 @@ namespace MovieMonste.Controllers
         // GET: Sales
         public async Task<IActionResult> Index()
         {
-            var movieMonsteContext = _context.Sale.Include(s => s.Customer).Include(m=>m.Movies);
+            var movieMonsteContext = _context.Sale.Include(s => s.Customer).Include(ms=>ms.Movies).Include("Movies.Movie");
             return View(await movieMonsteContext.ToListAsync());
         }
 
@@ -199,7 +199,7 @@ namespace MovieMonste.Controllers
             {
                 return NotFound();
             }
-            sale.Movies.Add(movie);
+          //  sale.Movies.Add(movie);
             return View();
         }
         

@@ -34,7 +34,11 @@
                 @Html.DisplayFor(modelItem => item.TotalPrice)
             </td>
             <td>
-               @*place for movies*@
+                @foreach (var movie in item.Movies)
+                {
+                    @Html.DisplayFor(itemMovie => movie.Movie.Title)
+                    <br />
+                }
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.StockOrderID">Edit</a> |
