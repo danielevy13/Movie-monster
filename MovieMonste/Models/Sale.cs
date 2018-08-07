@@ -8,10 +8,6 @@ namespace MovieMonste.Models
 {
     public class Sale
     {
-     //   public Sale()
-     //   {
-     //         this.Movies = new LinkedList<Movie>();
-     //   }
         public string SaleID { get; set; }
         public string CustomerID { get; set; }
         public bool Purchased { get; set; }

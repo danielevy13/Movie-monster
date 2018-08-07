@@ -17,8 +17,10 @@ namespace MovieMonste.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<MovieSale>().HasKey(ms => new { ms.MovieID, ms.SaleID });// config 2 primery key for MovieSale
-            modelBuilder.Entity<MovieStockOrder>().HasKey(ms => new { ms.MovieID, ms.StockOrderID});// config 2 primery key for MovieStockOrder
+            // config 2 primery key for MovieSale
+            modelBuilder.Entity<MovieSale>().HasKey(ms => new { ms.MovieID, ms.SaleID });
+            // config 2 primery key for MovieStockOrder
+            modelBuilder.Entity<MovieStockOrder>().HasKey(mso => new { mso.MovieID, mso.StockOrderID});
         }
 
         public DbSet<Customer> Customer { get; set; }
