@@ -12221,27 +12221,28 @@
       "Microsoft.AspNetCore.App >= 2.1.0",
       "Microsoft.EntityFrameworkCore.Tools >= 2.1.0",
       "Microsoft.NETCore.App >= 2.1.0",
-      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.1.0"
+      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.1.0",
+      "Newtonsoft.Json >= 11.0.2"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\daniel\\.nuget\\packages\\": {},
+    "C:\\Users\\mulik\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\daniel\\Documents\\GitHub\\Movie-monster\\MovieMonste\\MovieMonste.csproj",
+      "projectUniqueName": "C:\\Users\\mulik\\Documents\\GitHub\\Movie-monster\\MovieMonste\\MovieMonste.csproj",
       "projectName": "MovieMonste",
-      "projectPath": "C:\\Users\\daniel\\Documents\\GitHub\\Movie-monster\\MovieMonste\\MovieMonste.csproj",
-      "packagesPath": "C:\\Users\\daniel\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\daniel\\Documents\\GitHub\\Movie-monster\\MovieMonste\\obj\\",
+      "projectPath": "C:\\Users\\mulik\\Documents\\GitHub\\Movie-monster\\MovieMonste\\MovieMonste.csproj",
+      "packagesPath": "C:\\Users\\mulik\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\mulik\\Documents\\GitHub\\Movie-monster\\MovieMonste\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\daniel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\mulik\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -12283,6 +12284,10 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",
             "version": "[2.1.0, )"
+          },
+          "Newtonsoft.Json": {
+            "target": "Package",
+            "version": "[11.0.2, )"
           }
         },
         "imports": [

@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using MovieMonste.Features;
 using MovieMonste.Models;
+using Newtonsoft.Json;
 
 namespace MovieMonste.Controllers
 {
@@ -57,6 +61,37 @@ namespace MovieMonste.Controllers
         {
             if (ModelState.IsValid)
             {
+                ImdbEntity imdbMovie = OmdbFetcher(movie.Title);
+                if (imdbMovie != null)
+                {
+                    movie.Genere = imdbMovie.Genre;
+                    if (!imdbMovie.Released.Equals("N/A"))
+                    {
+                        movie.ReleaseDate = DateTime.Parse(imdbMovie.Released, new CultureInfo("de-DE"));
+                    }
+                    else
+                    {
+                        movie.ReleaseDate = DateTime.Now;
+                    }
+                    movie.Actors = imdbMovie.Actors;
+                    if (!imdbMovie.Released.Equals("N/A"))
+                    {
+                        if (imdbMovie.Rated.Equals("R") || imdbMovie.Rated.Equals("PG") || imdbMovie.Rated.Equals("PG-13"))
+                        {
+                            movie.MinAge = 16;
+                        }
+                        else
+                        {
+                            movie.MinAge = 18;
+                        }
+
+                    }
+                    movie.Language = imdbMovie.Language;
+                }
+                else
+                {
+                    movie.ReleaseDate = DateTime.Now;
+                }
                 _context.Add(movie);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -147,6 +182,21 @@ namespace MovieMonste.Controllers
         private bool MovieExists(string id)
         {
             return _context.Movie.Any(e => e.MovieID == id);
+        }
+        //fetch data from IMDB
+        public ImdbEntity OmdbFetcher(string title)
+        {
+            using (var webClient = new WebClient())
+            {
+                //string represntation of the JSON
+                string rawJson = webClient.DownloadString("http://www.omdbapi.com/?t=" + title + "&plot=full&apikey=94919479");
+                ImdbEntity obj = new ImdbEntity();
+                obj = JsonConvert.DeserializeObject<ImdbEntity>(rawJson);
+                if (obj.Response.Equals("True"))
+                    return obj;
+                else return null;
+            }
+
         }
     }
 }
