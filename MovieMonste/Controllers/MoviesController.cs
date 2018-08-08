@@ -42,7 +42,7 @@ namespace MovieMonste.Controllers
             {
                 return NotFound();
             }
-
+            ViewData["Title"] = new SelectList(_context.Movie, "Title", "Title");
             return View(movie);
         }
 
@@ -184,19 +184,30 @@ namespace MovieMonste.Controllers
             return _context.Movie.Any(e => e.MovieID == id);
         }
         //fetch data from IMDB
+        // disconnect from gave the jeson and convert him to object
         public ImdbEntity OmdbFetcher(string title)
+        {
+                ImdbEntity obj = new ImdbEntity();
+                obj = JsonConvert.DeserializeObject<ImdbEntity>(DownloadJesonMovie(title));
+                if (obj.Response.Equals("True"))
+                    return obj;
+                else return null;
+
+        }
+        public string DownloadJesonMovie(string title)
         {
             using (var webClient = new WebClient())
             {
                 //string represntation of the JSON
-                string rawJson = webClient.DownloadString("http://www.omdbapi.com/?t=" + title + "&plot=full&apikey=94919479");
-                ImdbEntity obj = new ImdbEntity();
-                obj = JsonConvert.DeserializeObject<ImdbEntity>(rawJson);
-                if (obj.Response.Equals("True"))
-                    return obj;
-                else return null;
+                //string rawJson = webClient.DownloadString("http://www.omdbapi.com/?t=" + title + "&plot=full&apikey=94919479");
+                return webClient.DownloadString("http://www.omdbapi.com/?t=" + title + "&plot=full&apikey=94919479");
             }
-
+        }
+        [HttpPost, ActionName("Search")]
+        [ValidateAntiForgeryToken]
+        public void Search (string title)
+        {
+           /* func for serch just from movie page */
         }
     }
 }

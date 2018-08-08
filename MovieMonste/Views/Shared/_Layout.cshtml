@@ -18,15 +18,16 @@
             <a href="#" class="navbar-brand text-uppercase d-lg-none text-expanded">Brand</a><button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="nav navbar-nav mx-auto">
-                    <li role="presentation" class="nav-item"><a href="/home" class="nav-link">Home</a></li>
-                    <li role="presentation" class="nav-item"><a href="/home/About" class="nav-link">About us</a></li>
-                    <li role="presentation" class="nav-item"><a href="/movies" class="nav-link">Products</a></li>
+                    <li role="presentation" class="nav-item"><a href="/Home" class="nav-link">Home</a></li>
+                    <li role="presentation" class="nav-item"><a href="/Home/About" class="nav-link">About us</a></li>
+                    <li role="presentation" class="nav-item"><a href="/Movies" class="nav-link">Products</a></li>
                     <li role="presentation" class="nav-item"><a href="/Sales" class="nav-link">Cart</a></li>
 
 
                     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
                     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
-                    <form class="search">
+                   @* add to from the action*@
+                    <form asp-action="Search" class="search">
                         <div class="search__wrapper">
                             <input type="text" name="" placeholder="Search for..." class="search__field">
                             <button type="submit" class="fa fa-search search__icon"></button>
