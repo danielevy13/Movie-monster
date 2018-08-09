@@ -173,8 +173,8 @@ namespace MovieMonste.Controllers
             {
                 return NotFound();
             }
-            ViewData["MovieID"] = new SelectList(_context.Movie, "MovieID", "MovieID");
-            return View(sale);
+            // ViewData["MovieID"] = new SelectList(_context.Movie, "MovieID", "MovieID");
+            return null; //new MovieSalesController(_context).Create(id);
         }
         
         [HttpPost]
