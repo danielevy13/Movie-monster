@@ -116,7 +116,7 @@ Write(Html.ActionLink("Edit", "Edit", new { SaleID = Model.SaleID, MovieID = Mod
             WriteLiteral(" |\r\n    ");
             EndContext();
             BeginContext(698, 38, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c1f7db6d017c4ea694123a3292b29100", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2d74611f9b304138bc4360eb4cb4f9a9", async() => {
                 BeginContext(720, 12, true);
                 WriteLiteral("Back to List");
                 EndContext();
