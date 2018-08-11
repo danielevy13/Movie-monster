@@ -26,14 +26,12 @@
 
                     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
                     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
-                   @* add to from the action*@
-                    <form asp-action="Search" class="search">
+                    <form asp-action="Search" class="search" method="post">
                         <div class="search__wrapper">
-                            <input type="text" name="" placeholder="Search for..." class="search__field">
+                            <input type="text" id="title" name="title" placeholder="Search for..." class="search__field"></input>
                             <button type="submit" class="fa fa-search search__icon"></button>
                         </div>
                     </form>
-
                 </ul>
             </div>
         </div>
