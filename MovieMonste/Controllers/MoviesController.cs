@@ -207,8 +207,8 @@ namespace MovieMonste.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Search (string title)
         {
-           /* searchTerms.Any(x => data.Name.Contains(x))*/
-            var movies= await _context.Movie.Where(movie => title.(x=>(movie.Title.Contains(x)))).ToListAsync();
+            /* need to change (the function work with exact title and not with part of the title)*/
+            var movies = await _context.Movie.Where(movie => movie.Title==title).ToListAsync();
             return View("Index", movies);
         }
     }
