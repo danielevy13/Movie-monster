@@ -203,12 +203,15 @@ namespace MovieMonste.Controllers
                 return webClient.DownloadString("http://www.omdbapi.com/?t=" + title + "&plot=full&apikey=94919479");
             }
         }
+        /* 
+          search function by title with Regex from begining and end connect to search box in the view
+          (HTML-layout, just if you on MoviesController page)
+        */
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Search (string title)
         {
-            /* need to change (the function work with exact title and not with part of the title)*/
-            var movies = await _context.Movie.Where(movie => movie.Title==title).ToListAsync();
+            var movies = await _context.Movie.Where(movie => movie.Title.Contains(title)).ToListAsync();
             return View("Index", movies);
         }
     }
