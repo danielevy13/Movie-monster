@@ -63,7 +63,11 @@ using MovieMonste.Models;
             WriteLiteral("\r\n<h2>Index</h2>\r\n\r\n<p>\r\n    ");
             EndContext();
             BeginContext(122, 37, false);
+<<<<<<< HEAD
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a1f97c89ecb14dfa8adf1c916d9cbcfd", async() => {
+=======
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2b1683b05bf7448ca3499814e065e049", async() => {
+>>>>>>> d7dd3a0c0866b00e051d60bf2ec16ceab38f726b
                 BeginContext(145, 10, true);
                 WriteLiteral("Create New");
                 EndContext();

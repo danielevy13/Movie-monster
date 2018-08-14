@@ -67,7 +67,11 @@ using MovieMonste.Models;
             WriteLiteral("\r\n<h2>Index</h2>\r\n\r\n<p>\r\n    ");
             EndContext();
             BeginContext(117, 37, false);
+<<<<<<< HEAD
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0eaa34015bfe45c590d108ba835073f6", async() => {
+=======
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "350fb845be6649c8b2c9a039147aea19", async() => {
+>>>>>>> d7dd3a0c0866b00e051d60bf2ec16ceab38f726b
                 BeginContext(140, 10, true);
                 WriteLiteral("Create New");
                 EndContext();
@@ -192,7 +196,11 @@ using MovieMonste.Models;
             WriteLiteral("            </td>\r\n            <td>\r\n                ");
             EndContext();
             BeginContext(1350, 57, false);
+<<<<<<< HEAD
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "eef5767e2d6a4483919b1d803e5bba5b", async() => {
+=======
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4782eb6b5ae34225bd85eabf695f1dc0", async() => {
+>>>>>>> d7dd3a0c0866b00e051d60bf2ec16ceab38f726b
                 BeginContext(1399, 4, true);
                 WriteLiteral("Edit");
                 EndContext();
@@ -227,7 +235,11 @@ using MovieMonste.Models;
             WriteLiteral(" |\r\n                ");
             EndContext();
             BeginContext(1427, 63, false);
+<<<<<<< HEAD
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "42011c2e0438438eb3db6151309ddd10", async() => {
+=======
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2f0a66e620b24147956a6b5896e9f57a", async() => {
+>>>>>>> d7dd3a0c0866b00e051d60bf2ec16ceab38f726b
                 BeginContext(1479, 7, true);
                 WriteLiteral("Details");
                 EndContext();
@@ -262,7 +274,11 @@ using MovieMonste.Models;
             WriteLiteral(" |\r\n                ");
             EndContext();
             BeginContext(1510, 61, false);
+<<<<<<< HEAD
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b1599b1a635040ba9f0a9fc759c06328", async() => {
+=======
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "dd3d825ad4da43dea2806abef1cc3e67", async() => {
+>>>>>>> d7dd3a0c0866b00e051d60bf2ec16ceab38f726b
                 BeginContext(1561, 6, true);
                 WriteLiteral("Delete");
                 EndContext();
@@ -297,7 +313,11 @@ using MovieMonste.Models;
             WriteLiteral(" |\r\n                ");
             EndContext();
             BeginContext(1591, 71, false);
+<<<<<<< HEAD
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4e03e502f12f4335b54be2f122f254cb", async() => {
+=======
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8736ef2bfe4a4a4ba1a601ff6a2fcf90", async() => {
+>>>>>>> d7dd3a0c0866b00e051d60bf2ec16ceab38f726b
                 BeginContext(1650, 8, true);
                 WriteLiteral("AddMovie");
                 EndContext();

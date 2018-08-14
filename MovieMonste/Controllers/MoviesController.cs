@@ -25,7 +25,9 @@ namespace MovieMonste.Controllers
         // GET: Movies
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Movie.ToListAsync());
+
+           var  movies = await _context.Movie.ToListAsync();
+            return View(movies);
         }
 
         // GET: Movies/Details/5
@@ -198,16 +200,19 @@ namespace MovieMonste.Controllers
         {
             using (var webClient = new WebClient())
             {
-                //string represntation of the JSON
-                //string rawJson = webClient.DownloadString("http://www.omdbapi.com/?t=" + title + "&plot=full&apikey=94919479");
                 return webClient.DownloadString("http://www.omdbapi.com/?t=" + title + "&plot=full&apikey=94919479");
             }
         }
-        [HttpPost, ActionName("Search")]
+        /* 
+          search function by title with Regex from begining and end connect to search box in the view
+          (HTML-layout, just if you on MoviesController page)
+        */
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public void Search (string title)
+        public async Task<IActionResult> Search (string title)
         {
-           /* func for serch just from movie page */
+            var movies = await _context.Movie.Where(movie => movie.Title.Contains(title)).ToListAsync();
+            return View("Index", movies);
         }
     }
 }
