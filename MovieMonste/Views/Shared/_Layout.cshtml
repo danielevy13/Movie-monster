@@ -1,6 +1,9 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+    @*My addon*@
+    @model FormBasics.Controllers.FormModel
+    --------------------
 
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
@@ -26,13 +29,23 @@
 
                     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
                     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
-                   @* add to from the action*@
-                    <form asp-action="Search" class="search">
-                        <div class="search__wrapper">
-                            <input type="text" name="" placeholder="Search for..." class="search__field">
-                            <button type="submit" class="fa fa-search search__icon"></button>
-                        </div>
+                    @* add action to the form *@
+
+
+                    <form class="form-inline md-form form-sm">
+                        <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search" aria-label="Search">
+                        <i class="fa fa-search" aria-hidden="true"></i>
                     </form>
+
+
+                    @*<form asp-action="Search" class="search">
+            <div class="search__wrapper">
+
+                <input type="text" name="" placeholder="Movie Name" class="search__field" id="text">
+                <button type="submit" class="fa fa-search search__icon"
+                        onclick="Movie.href='@Url.Action("Search", "Movies")?id=' + $('text').val()"/>
+            </div>
+        </form>*@
 
                 </ul>
             </div>
