@@ -209,10 +209,11 @@ namespace MovieMonste.Controllers
         */
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Search (string title)
+        public void Search (string searchTxt)
         {
-            var movies = await _context.Movie.Where(movie => movie.Title.Contains(title)).ToListAsync();
-            return View("Index", movies);
+          //  var movies = await _context.Movie.Where(movie => movie.Title.Contains(searchTxt)).ToListAsync();
+            //return View("Index", movies);
+           // return "muli maniak";
         }
     }
 }
