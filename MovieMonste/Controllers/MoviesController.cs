@@ -25,11 +25,9 @@ namespace MovieMonste.Controllers
         // GET: Movies
         public async Task<IActionResult> Index()
         {
-
            var  movies = await _context.Movie.ToListAsync();
             return View(movies);
         }
-
         // GET: Movies/Details/5
         public async Task<IActionResult> Details(string id)
         {
@@ -207,13 +205,41 @@ namespace MovieMonste.Controllers
           search function by title with Regex from begining and end connect to search box in the view
           (HTML-layout, just if you on MoviesController page)
         */
+
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public void Search (string searchTxt)
+        public async Task<string> Search (string searchTxt)
         {
-          //  var movies = await _context.Movie.Where(movie => movie.Title.Contains(searchTxt)).ToListAsync();
-            //return View("Index", movies);
-           // return "muli maniak";
+            var movies = await _context.Movie.Where(movie => movie.Title.Contains(searchTxt)).ToListAsync();
+            var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(movies);
+            return jsonString;
         }
+
+        [HttpPost]
+        public async Task<string> AdvancedSearch([Bind("MovieID,Title,Genere,UnitsInStock,ReleaseDate,Actors,MinAge,Language")] Movie searchMovie)
+        {
+            var result = _context.Movie.AsQueryable();
+            if (searchMovie != null) { 
+                if (searchMovie.MovieID != null)
+                    result = result.Where(movie => movie.MovieID == searchMovie.MovieID);
+                if (searchMovie.Title != null)
+                    result = result.Where(movie => movie.Title.Contains(searchMovie.Title));
+                if (searchMovie.Genere != null)
+                    result = result.Where(movie => movie.Genere == searchMovie.Genere);
+                if (searchMovie.UnitsInStock != 0)
+                    result = result.Where(movie => movie.UnitsInStock == searchMovie.UnitsInStock);
+                if (searchMovie.Actors != null)
+                    result = result.Where(movie => movie.Actors == searchMovie.Actors);
+               // if (searchMovie.ReleaseDate != null)
+               //     result = result.Where(movie => movie.ReleaseDate.Year == searchMovie.ReleaseDate.Year);
+                if (searchMovie.MinAge != 0)
+                    result = result.Where(movie => movie.MinAge == searchMovie.MinAge);
+                if (searchMovie.Language != null)
+                    result = result.Where(movie => movie.Language == searchMovie.Language);
+            }
+            var list = await result.ToListAsync<Movie>();
+            var listJason = Newtonsoft.Json.JsonConvert.SerializeObject(list);
+            return listJason;
+        }
+
     }
 }

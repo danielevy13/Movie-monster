@@ -4,7 +4,7 @@
 
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    @*<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>*@
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 
     <meta charset="utf-8" />
@@ -27,17 +27,15 @@
 
                     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
                     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
-                    @*    <form asp-controller="Movies" asp-action="Search" class="search" method="post">   *@
                     <div class="search__wrapper">
                         <input type="text" id="searchTxt" name="searchTxt" placeholder="Search for..." class="search__field"></input>
                         <button id="search-btn" type="submit" class="fa fa-search search__icon"></button>
                     </div>
-                    @*  </form>   *@
                 </ul>
             </div>
         </div>
     </nav>
-    <div class="container" style="background-color: #ffffff;">
+    <div id="bodyContainer" class="container" style="background-color: #ffffff;">
         @RenderBody()
     </div>
     <section class="page-section clearfix"></section>
@@ -50,34 +48,18 @@
     @*  @section Scripts{ *@
     <script src="~/assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="~/assets/js/current-day.js"></script>
-    @*
-        <script>
-            $(document).ready(function () {
-                $("#search-btn").click(function () {
-                    var search = $("#searchTxt").val();
-                    alert("/Movies/Search?searchTxt=" + search);
-                    $.post("/Movies/Search?searchTxt=" + search, function (result) {
-                        alert(result);
-                    });
-                })
-            })
-        </script>
-    *@
+    <script src="~/assets/js/MovieMonstersScript.js"></script>
     <script>
               $(document).ready(function () {
                    $("#search-btn").click(function () {
                        var search = $("#searchTxt").val();
-                       alert(JSON.stringify({ searchTxt: search }));
                        $.ajax({
                            'type': 'POST',
-                           'dataType': 'string',
-                           'cache': 'false',
-                           'url': '@Url.Action("Search", "Movies")',
-                           'contentType': "application/json; charset=utf-8",
-                           'data': { "searchTxt": search },
-                            'async' : false,
-                            'success' : function (data) {
-                                alert(data);
+                           'dataType': 'json',
+                           'url': '@Url.Action("AdvancedSearch", "Movies")',
+                           'data': { "Title": search },
+                           'success': function (movies) {
+                               $(bodyContainer).replaceWith(MovieListToHtml(movies));
                             },
                             'error' : function () {
                                 alert("Error while inserting data");
@@ -85,6 +67,8 @@
                         });
                    })
               })
+
+
     </script>
     @* } *@
     @RenderSection("Scripts", required: false)

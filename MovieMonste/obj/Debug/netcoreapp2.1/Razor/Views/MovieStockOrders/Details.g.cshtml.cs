@@ -133,7 +133,7 @@ Write(Html.ActionLink("Edit", "Edit", new { MovieID = Model.MovieID, StockOrderI
             WriteLiteral(" |\r\n    ");
             EndContext();
             BeginContext(862, 38, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9e347dca063d4cb08e518d13519a7605", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0aadea2e99e541f0bd61c11d5a4b75e1", async() => {
                 BeginContext(884, 12, true);
                 WriteLiteral("Back to List");
                 EndContext();
