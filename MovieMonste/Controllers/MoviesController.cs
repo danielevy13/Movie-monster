@@ -188,6 +188,7 @@ namespace MovieMonste.Controllers
         public ImdbEntity OmdbFetcher(string title)
         {
                 ImdbEntity obj = new ImdbEntity();
+            var json = DownloadJesonMovie(title);
                 obj = JsonConvert.DeserializeObject<ImdbEntity>(DownloadJesonMovie(title));
                 if (obj.Response.Equals("True"))
                     return obj;
@@ -215,7 +216,7 @@ namespace MovieMonste.Controllers
         }
 
         [HttpPost]
-        public async Task<string> AdvancedSearch([Bind("MovieID,Title,Genere,UnitsInStock,ReleaseDate,Actors,MinAge,Language")] Movie searchMovie)
+        public async Task<string> AdvancedSearch(int year, [Bind("MovieID,Title,Genere,UnitsInStock,ReleaseDate,Actors,MinAge,Language")] Movie searchMovie)
         {
             var result = _context.Movie.AsQueryable();
             if (searchMovie != null) { 
@@ -228,15 +229,21 @@ namespace MovieMonste.Controllers
                 if (searchMovie.UnitsInStock != 0)
                     result = result.Where(movie => movie.UnitsInStock == searchMovie.UnitsInStock);
                 if (searchMovie.Actors != null)
-                    result = result.Where(movie => movie.Actors == searchMovie.Actors);
-               // if (searchMovie.ReleaseDate != null)
-               //     result = result.Where(movie => movie.ReleaseDate.Year == searchMovie.ReleaseDate.Year);
+                {
+                    string[] actorsSplit = searchMovie.Actors.Split(',');
+                    foreach (string actor in actorsSplit)
+                    {
+                        result = result.Where(movie => movie.Actors.Contains(actor)) ;
+                    }
+                }
+                if (year != 0)
+                    result = result.Where(movie => movie.ReleaseDate.Year == year);
                 if (searchMovie.MinAge != 0)
                     result = result.Where(movie => movie.MinAge == searchMovie.MinAge);
                 if (searchMovie.Language != null)
                     result = result.Where(movie => movie.Language == searchMovie.Language);
             }
-            var list = await result.ToListAsync<Movie>();
+            var list = await result.ToListAsync();
             var listJason = Newtonsoft.Json.JsonConvert.SerializeObject(list);
             return listJason;
         }

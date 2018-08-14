@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
-<head> 
-
+<head>
+    
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     @*<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>*@
@@ -21,7 +21,7 @@
                 <ul class="nav navbar-nav mx-auto">
                     <li role="presentation" class="nav-item"><a href="/Home" class="nav-link">Home</a></li>
                     <li role="presentation" class="nav-item"><a href="/Home/About" class="nav-link">About us</a></li>
-                    <li role="presentation" class="nav-item"><a href="/Movies" class="nav-link">Products</a></li>
+                    <li role="presentation" class="nav-item"><a onclick="loadTableMovies()" class="nav-link">Products</a></li>
                     <li role="presentation" class="nav-item"><a href="/Sales" class="nav-link">Cart</a></li>
 
 
@@ -29,7 +29,8 @@
                     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
                     <div class="search__wrapper">
                         <input type="text" id="searchTxt" name="searchTxt" placeholder="Search for..." class="search__field"></input>
-                        <button id="search-btn" type="submit" class="fa fa-search search__icon"></button>
+                        <button id="search-btn" type="submit" class="fa fa-search search__icon" onclick="Search()"></button>
+                        <a onclick="AdvancedSearchPage()">AdvancedSearch</a>
                     </div>
                 </ul>
             </div>
@@ -45,32 +46,12 @@
         </div>
     </footer>
 
-    @*  @section Scripts{ *@
+    <link rel="stylesheet" type="text/css" href="~/assets/css/searchCss.css">
+    @*   @section Scripts{ *@
     <script src="~/assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="~/assets/js/current-day.js"></script>
     <script src="~/assets/js/MovieMonstersScript.js"></script>
-    <script>
-              $(document).ready(function () {
-                   $("#search-btn").click(function () {
-                       var search = $("#searchTxt").val();
-                       $.ajax({
-                           'type': 'POST',
-                           'dataType': 'json',
-                           'url': '@Url.Action("AdvancedSearch", "Movies")',
-                           'data': { "Title": search },
-                           'success': function (movies) {
-                               $(bodyContainer).replaceWith(MovieListToHtml(movies));
-                            },
-                            'error' : function () {
-                                alert("Error while inserting data");
-                            }
-                        });
-                   })
-              })
-
-
-    </script>
-    @* } *@
+      @* } *@
     @RenderSection("Scripts", required: false)
 
 
