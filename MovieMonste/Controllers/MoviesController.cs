@@ -28,6 +28,12 @@ namespace MovieMonste.Controllers
            var  movies = await _context.Movie.ToListAsync();
             return View(movies);
         }
+        [HttpPost]
+        public async Task<PartialViewResult> ShortIndex()
+        {
+            var movies = await _context.Movie.ToListAsync();
+            return PartialView("Index",movies);
+        }
         // GET: Movies/Details/5
         public async Task<IActionResult> Details(string id)
         {

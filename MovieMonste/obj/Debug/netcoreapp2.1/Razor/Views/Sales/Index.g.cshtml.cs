@@ -67,7 +67,7 @@ using MovieMonste.Models;
             WriteLiteral("\r\n<h2>Index</h2>\r\n\r\n<p>\r\n    ");
             EndContext();
             BeginContext(117, 37, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "75eb6c9274644cb797e135c51f5eca40", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "70180b5465b3496bb84e204aed84a175", async() => {
                 BeginContext(140, 10, true);
                 WriteLiteral("Create New");
                 EndContext();
@@ -192,7 +192,7 @@ using MovieMonste.Models;
             WriteLiteral("            </td>\r\n            <td>\r\n                ");
             EndContext();
             BeginContext(1350, 57, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b6cf7c5a66e043d095784392bbc67847", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "13f489f513af47ad863b9e77e61e17c1", async() => {
                 BeginContext(1399, 4, true);
                 WriteLiteral("Edit");
                 EndContext();
@@ -227,7 +227,7 @@ using MovieMonste.Models;
             WriteLiteral(" |\r\n                ");
             EndContext();
             BeginContext(1427, 63, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ab8d28c6ecd443b286fc9e2d01819e6d", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9bbcd109f0c24a3ca7a6530d9dddb04a", async() => {
                 BeginContext(1479, 7, true);
                 WriteLiteral("Details");
                 EndContext();
@@ -262,7 +262,7 @@ using MovieMonste.Models;
             WriteLiteral(" |\r\n                ");
             EndContext();
             BeginContext(1510, 61, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "bafe5d5ec4b8494fb59580a824085361", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e33d7c0683014a4d941bea36dfecd890", async() => {
                 BeginContext(1561, 6, true);
                 WriteLiteral("Delete");
                 EndContext();
@@ -297,7 +297,7 @@ using MovieMonste.Models;
             WriteLiteral(" |\r\n                ");
             EndContext();
             BeginContext(1591, 71, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8efc74f7966a4da6bad10c6c75483b54", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "184ea566f7e64a508b53763b081ecc02", async() => {
                 BeginContext(1650, 8, true);
                 WriteLiteral("AddMovie");
                 EndContext();
