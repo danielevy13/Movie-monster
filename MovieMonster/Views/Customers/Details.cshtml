@@ -1,0 +1,97 @@
+﻿@model MovieMonster.Models.Customer
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Customer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CustomerID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BirthDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BirthDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+    </dl>
+</div>
+
+<p id="customerLocationSTR" type=" text">
+    @Html.DisplayFor(model => model.State), @Html.DisplayFor(model => model.City), @Html.DisplayFor(model => model.StreetName)
+</p>
+<div id="googleMapsContainer" onload="initMap()"></div>
+<style>
+
+    #map {
+        height: 320px; /* The height is 400 pixels */
+        width: 480px; /* The width is the width of the web page */
+    }
+</style>
+<div id="map"></div>
+<script>function initMap() {
+    var marker
+    var modelAdress = $("#customerLocationSTR").text();
+    var geocoder = new google.maps.Geocoder();
+    var latlng = new google.maps.LatLng(31.046051, 34.851612);
+    var mapOptions = {
+        zoom: 20,
+        center: latlng
+    }
+    var map = new google.maps.Map(
+        document.getElementById('map'), mapOptions);
+    geocoder.geocode({ 'address': modelAdress }, function (results, status) {
+        if (status == 'OK') {
+            alert("OK");
+            map.setCenter(results[0].geometry.location);
+                marker = new google.maps.Marker({
+                map: map,
+                position: results[0].geometry.location
+            });
+            alert("Marker set.")
+        }
+        else {
+            alert('couldnt locate customer location');
+        }
+    });
+}</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-x2XCvFbeRPUUIx1yoER2DIJ088GkaWc&callback=initMap"></script>
+
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.CustomerID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

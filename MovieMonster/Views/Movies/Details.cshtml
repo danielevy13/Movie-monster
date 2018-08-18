@@ -1,0 +1,116 @@
+﻿@model MovieMonster.Models.Movie
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Movie</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Genere)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Genere)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UnitsInStock)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UnitsInStock)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.YearRelease)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.YearRelease)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Actors)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Actors)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Rated)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Rated)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Language)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Language)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Retail)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Retail)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Wholesale)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Wholesale)
+        </dd>
+</div>
+<div>
+    <img src="@ViewBag.Poster" />
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.MovieID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+@*
+    <form asp-action="Edit">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Title" class="control-label"></label>
+            <select asp-for="Title" class="form-control" asp-items="ViewBag.Title"></select>
+            <div class="form-group">
+                <input type="submit" value="Others" class="btn btn-default" />
+            </div>
+        </div>
+    </form>
+*@
+@*
+
+    AJAX
+
+
+    <div class="form-group">
+      <button id="rr" class="btn btn-primary"></button>
+       <input id="ss" type="text" name="ss" />
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.MovieID">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>
+    @section Scripts{
+        <script>
+            $(document).ready(function () {
+                $('#rr').click(changeValue);
+
+            });
+
+            function changeValue() {
+                var title = ("#ss").val();
+                console.log(title);
+                $.get('Movies/UplodeJesonMovie', { "title": title }, function (data, status));
+                console.log(data);
+            }
+        </script>
+
+    }
+*@
