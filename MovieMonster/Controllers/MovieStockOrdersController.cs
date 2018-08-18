@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -189,6 +190,25 @@ namespace MovieMonster.Controllers
         private bool MovieStockOrderExists(string StockOrderID, string MovieID)
         {
             return _context.MovieStockOrder.Any(e => e.MovieID == MovieID && e.StockOrderID == StockOrderID);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public async Task<string> AdvancedSearch([Bind("StockOrderID,MovieID,Quantity")] MovieStockOrder searchMovieStockOrder)
+        {
+            var result = _context.MovieStockOrder.AsQueryable();
+            if (searchMovieStockOrder != null)
+            {
+                if (searchMovieStockOrder.StockOrderID != null)
+                    result = result.Where(movieStockOrder => movieStockOrder.StockOrderID == searchMovieStockOrder.StockOrderID);
+                if (searchMovieStockOrder.MovieID != null)
+                    result = result.Where(movieStockOrder => movieStockOrder.MovieID == searchMovieStockOrder.MovieID);
+                if (searchMovieStockOrder.Quantity != 0)
+                    result = result.Where(movieStockOrder => movieStockOrder.Quantity == searchMovieStockOrder.Quantity);
+            }
+            var list = await result.ToListAsync();
+            var listJason = Newtonsoft.Json.JsonConvert.SerializeObject(list);
+            return listJason;
         }
     }
 }

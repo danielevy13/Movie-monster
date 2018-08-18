@@ -162,5 +162,40 @@ namespace MovieMonster.Controllers
             var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(customers);
             return jsonString;
         }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public async Task<string> AdvancedSearch(int Year, [Bind("CustomerID,UserID,FirstName,LastName,BirthDate,PhoneNumber,Gender,State,City,StreetName,ApartmentNumber,ZipCode")] Customer searchCustomer)
+        {
+            var result = _context.Customer.AsQueryable();
+            if (searchCustomer != null)
+            {
+                if (searchCustomer.CustomerID != null)
+                    result = result.Where(customer => customer.CustomerID == searchCustomer.CustomerID);
+                if (searchCustomer.FirstName != null)
+                    result = result.Where(customer => customer.FirstName == searchCustomer.FirstName);
+                if (searchCustomer.LastName != null)
+                    result = result.Where(customer => customer.LastName == searchCustomer.LastName);
+                if (Year != 0)
+                    result = result.Where(customer => customer.BirthDate.Year == Year);
+                if (searchCustomer.PhoneNumber != null)
+                    result = result.Where(customer => customer.PhoneNumber == searchCustomer.PhoneNumber);
+                if (searchCustomer.Gender != null)
+                    result = result.Where(customer => customer.Gender == searchCustomer.Gender);
+                if (searchCustomer.State != null)
+                    result = result.Where(customer => customer.State == searchCustomer.State);
+                if (searchCustomer.City != null)
+                    result = result.Where(customer => customer.City == searchCustomer.City);
+                if (searchCustomer.StreetName != null)
+                    result = result.Where(customer => customer.StreetName == searchCustomer.StreetName);
+                if (searchCustomer.ApartmentNumber != 0)
+                    result = result.Where(customer => customer.ApartmentNumber == searchCustomer.ApartmentNumber);
+                if (searchCustomer.ZipCode != 0)
+                    result = result.Where(customer => customer.ZipCode == searchCustomer.ZipCode);
+            }
+            var list = await result.ToListAsync();
+            var listJason = Newtonsoft.Json.JsonConvert.SerializeObject(list);
+            return listJason;
+        }
     }
 }

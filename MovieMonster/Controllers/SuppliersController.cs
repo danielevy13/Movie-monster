@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -149,5 +150,27 @@ namespace MovieMonster.Controllers
         {
             return _context.Supplier.Any(e => e.SupplierID == id);
         }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public async Task<string> AdvancedSearch([Bind("SupplierID,Name,PhoneNumber,MailAddress")] Supplier searchSupplier)
+        {
+            var result = _context.Supplier.AsQueryable();
+            if (searchSupplier != null)
+            {
+                if (searchSupplier.SupplierID != null)
+                    result = result.Where(supplier => supplier.SupplierID == searchSupplier.SupplierID);
+                if (searchSupplier.Name != null)
+                    result = result.Where(supplier => supplier.Name == searchSupplier.Name);
+                if (searchSupplier.PhoneNumber != null)
+                    result = result.Where(supplier => supplier.PhoneNumber == searchSupplier.PhoneNumber);
+                if (searchSupplier.MailAddress != null)
+                    result = result.Where(supplier => supplier.MailAddress == searchSupplier.MailAddress);
+            }
+            var list = await result.ToListAsync();
+            var listJason = Newtonsoft.Json.JsonConvert.SerializeObject(list);
+            return listJason;
+        }
+
     }
 }

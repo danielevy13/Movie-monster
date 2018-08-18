@@ -516,6 +516,25 @@ namespace MovieMonster.Controllers
             var r = await _userManager.DeleteAsync(user);
             return RedirectToAction("Logout", "Account");
         }
+
+        public async Task<IActionResult> SendUserToAction()
+        {
+            var user = await _userManager.GetUserAsync(User);
+
+            return RedirectToAction("MatchCartToCustomer", "Sales", new
+            {
+                CustomerID = user.Email
+            });
+        }
+        public async Task<IActionResult> UsersCart(string id)
+        {
+            var user = await _userManager.GetUserAsync(User);
+
+            return RedirectToAction("AddMovieToCart", "Movies", new
+            {
+                CustomerID = user.Email, MovieID=id
+            });
+        }
         #region Helpers
 
         private void AddErrors(IdentityResult result)

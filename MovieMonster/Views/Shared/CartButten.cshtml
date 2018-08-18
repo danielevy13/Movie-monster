@@ -1,0 +1,10 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using MovieMonster.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <li role="presentation" class="nav-item"><a href="/Manage/SendUserToAction" class="nav-link">Cart</a></li>
+}

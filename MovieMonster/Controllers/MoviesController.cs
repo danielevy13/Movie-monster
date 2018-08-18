@@ -242,5 +242,33 @@ namespace MovieMonster.Controllers
             return listJason;
         }
 
+        public async Task<IActionResult> AddMovieToCart(string CustomerID, string MovieID)
+        {
+            var customer = await _context.Customer.Include(u => u.Sales).FirstOrDefaultAsync(u => u.CustomerID == CustomerID);
+            var cart = new Sale();
+            var sales = await _context.Sale.ToListAsync();
+            foreach (var sale in customer.Sales)
+            {
+                if (sale.Purchased == false)
+                    cart = sale;
+            }
+            if (cart.SaleID != null)
+            {
+                return RedirectToAction("Create", "MovieSales", new
+                {
+                    SaleID=cart.SaleID, MovieID=MovieID
+                });
+            }
+            var SaleID = sales.Count + 1;
+            return RedirectToAction("Create", "Sales", new
+            {
+                SaleID=SaleID,
+                MovieID = MovieID,
+                CustomerID = customer.CustomerID,
+                Purchased=false
+
+            });
+        }
+
     }
 }

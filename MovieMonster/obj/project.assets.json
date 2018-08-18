@@ -12859,11 +12859,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\daniel\\source\\repos\\MovieMonster\\MovieMonster\\MovieMonster.csproj",
+      "projectUniqueName": "C:\\Users\\daniel\\Documents\\GitHub\\Movie-monster\\MovieMonster\\MovieMonster.csproj",
       "projectName": "MovieMonster",
-      "projectPath": "C:\\Users\\daniel\\source\\repos\\MovieMonster\\MovieMonster\\MovieMonster.csproj",
+      "projectPath": "C:\\Users\\daniel\\Documents\\GitHub\\Movie-monster\\MovieMonster\\MovieMonster.csproj",
       "packagesPath": "C:\\Users\\daniel\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\daniel\\source\\repos\\MovieMonster\\MovieMonster\\obj\\",
+      "outputPath": "C:\\Users\\daniel\\Documents\\GitHub\\Movie-monster\\MovieMonster\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

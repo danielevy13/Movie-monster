@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,7 @@ namespace MovieMonster.Controllers
     public class SalesController : Controller
     {
         private readonly ApplicationDbContext _context;
+
 
         public SalesController(ApplicationDbContext context)
         {
@@ -35,7 +37,7 @@ namespace MovieMonster.Controllers
                 return NotFound();
             }
 
-            var sale = await _context.Sale.Include(s => s.Customer)
+            var sale = await _context.Sale.Include(s => s.Customer).Include("Movies.Movie")
                 .FirstOrDefaultAsync(m => m.SaleID == id);
             if (sale == null)
             {
@@ -45,25 +47,29 @@ namespace MovieMonster.Controllers
             return View(sale);
         }
 
-        // GET: Sales/Create
-        public IActionResult Create()
-        {
-            ViewData["CustomerID"] = new SelectList(_context.Customer, "CustomerID", "CustomerID");
-            return View();
-        }
+        //// GET: Sales/Create
+        //public IActionResult Create()
+        //{
+        //    ViewData["CustomerID"] = new SelectList(_context.Customer, "CustomerID", "CustomerID");
+        //    return View();
+        //}
 
         // POST: Sales/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SaleID,CustomerID,Purchased,TotalPrice")] Sale sale)
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(string MovieID, [Bind("SaleID,CustomerID,Purchased,TotalPrice")] Sale sale)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(sale);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Create", "MovieSale", new
+                {
+                    SaleID = sale.SaleID,
+                    MovieID = MovieID
+                });
             }
             ViewData["CustomerID"] = new SelectList(_context.Customer, "CustomerID", "CustomerID");
             return View(sale);
@@ -160,98 +166,115 @@ namespace MovieMonster.Controllers
         /******************MyFunctions*******************/
 
         // GET: Sales/AddMovieToCart/5
-        public async Task<IActionResult> AddMovieToCart(string id)
+        //public async Task<IActionResult> AddMovieToCart(string id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    var sale = await _context.Sale.FindAsync(id);
+        //    if (sale == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    // ViewData["MovieID"] = new SelectList(_context.Movie, "MovieID", "MovieID");
+        //    return null; //new MovieSalesController(_context).Create(id);
+        //}
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> AddMovieToCart(string saleID, string movieID)
+        //{
+        //    if (saleID == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    var sale = await _context.Sale.FindAsync(saleID);
+        //    if (sale == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    if (movieID == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    var movie = await _context.Movie.FindAsync(movieID);
+        //    if (movie == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    //  sale.Movies.Add(movie);
+        //    return View();
+        //}
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public async Task<string> AdvancedSearch([Bind("SaleID,CustomerID,Purchased,TotalPrice")] Sale searchSale)
+        {
+            var result = _context.Sale.AsQueryable();
+            if (searchSale != null)
+            {
+                if (searchSale.SaleID != null)
+                    result = result.Where(sale => sale.SaleID == searchSale.SaleID);
+                if (searchSale.CustomerID != null)
+                    result = result.Where(sale => sale.CustomerID == searchSale.CustomerID);
+              //  if (searchSale.Purchased != null)
+              //      result = result.Where(sale => sale.Purchased == searchSale.Purchased);
+                if (searchSale.TotalPrice != 0)
+                    result = result.Where(sale => sale.TotalPrice == searchSale.TotalPrice);
+            }
+            var list = await result.ToListAsync();
+            var listJason = Newtonsoft.Json.JsonConvert.SerializeObject(list);
+            return listJason;
+        }
+
+        public async Task<IActionResult> MatchCartToCustomer(string CustomerID)
+        {
+            var customer =await _context.Customer.Include(u => u.Sales).Include("Sales.Movies.Movie").FirstOrDefaultAsync(u => u.CustomerID == CustomerID);
+            var cart= new List<Sale>();
+            foreach (var sale in customer.Sales)
+            {
+                if (sale.Purchased == false)
+                {
+                    cart.Add(await _context.Sale.Include(ms => ms.Movies).Include("Movies.Movie").FirstOrDefaultAsync(s => s.SaleID == sale.SaleID));
+                }
+            }
+            return View("Index", cart);
+        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> Purchase(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var sale = await _context.Sale.FindAsync(id);
+            var sale = await _context.Sale.FirstOrDefaultAsync(m => m.SaleID == id);
             if (sale == null)
             {
                 return NotFound();
             }
-            // ViewData["MovieID"] = new SelectList(_context.Movie, "MovieID", "MovieID");
-            return null; //new MovieSalesController(_context).Create(id);
+            sale.Purchased = true;
+            try
+            {
+                _context.Update(sale);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!SaleExists(sale.SaleID))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction("Index", "Home");
         }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddMovieToCart(string saleID, string movieID)
-        {
-            if (saleID == null)
-            {
-                return NotFound();
-            }
-
-            var sale = await _context.Sale.FindAsync(saleID);
-            if (sale == null)
-            {
-                return NotFound();
-            }
-            if (movieID == null)
-            {
-                return NotFound();
-            }
-            var movie = await _context.Movie.FindAsync(movieID);
-            if (movie == null)
-            {
-                return NotFound();
-            }
-            //  sale.Movies.Add(movie);
-            return View();
-        }
-
-        /*
-        public JsonResult QuantityJson() {
-            var quantityTable = (from mo in _context.Movie
-                                 join ms in _context.MovieSale
-                                 on mo.MovieID equals ms.MovieID
-                                 where ms.Quantity > 0
-                                 select new
-                                 {
-                                     movieName = mo.Title,
-                                     quantity = ms.Quantity
-                                 });
-            return Json(quantityTable);
-        }
-
-        public ActionResult SalesPieChart()
-        {
-            return View();
-        }
-
-        public ActionResult TotalSalesChart()
-        {
-
-            List<Sale> sales = _context.Sale.ToList();
-            Dictionary<int, int> counter = new Dictionary<int, int>();
-            foreach (var Title in _context.Movie)
-            {
-                counter.Add(int.Parse(Title.MovieID), 0);
-            }
-
-            foreach (var movieSale in _context.MovieSale)
-            {
-                counter[int.Parse(movieSale.MovieID)] += 1;
-            }
-            var items = from pair in counter
-                        orderby pair.Value descending
-                        select pair;
-
-            List<int> resVal = new List<int>();
-            List<String> resName = new List<string>();
-            List<KeyValuePair<string, int>> res = new List<KeyValuePair<string, int>>();
-            foreach (var pair in items)
-            {
-                res.Add(new KeyValuePair<string, int>(_context.Movie.Find(pair.Key).Title.ToString(), pair.Value));
-                // resVal.Add(pair.Value*10);
-                //  resName.Add(db.Paints.Find(pair.Key).PaintName.ToString());
-            }
-
-            return View(res);
-        }
-     */
     }
 }

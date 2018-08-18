@@ -46,12 +46,12 @@
                     @Html.DisplayFor(itemMovie => movie.Movie.Title)
                     <br />
                 }
-            </td>
+           </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.SaleID">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.SaleID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.SaleID">Delete</a> |
-                <a asp-action="AddMovieToCart" asp-route-id="@item.SaleID">AddMovie</a>
+                <a asp-action="Delete" asp-route-id="@item.SaleID">Delete</a> @*|
+                <a asp-action="AddMovieToCart" asp-route-id="@item.SaleID">AddMovie</a>*@
             </td>
         </tr>
 }

@@ -28,9 +28,19 @@
         <dd>
             @Html.DisplayFor(model => model.TotalPrice)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Movies)
+        </dt>
+        @foreach (var movie in Model.Movies)
+        {
+            @* include Movie from MovieSale *@
+            @Html.DisplayFor(itemMovie => movie.Movie.Title)
+            <br />
+        }
     </dl>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.SaleID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    @Html.ActionLink("Buy Now", "Purchase", new { id = Model.SaleID})
+
 </div>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -46,19 +47,19 @@ namespace MovieMonster.Controllers
             return View(movieSale);
         }
 
-        // GET: MovieSales/Create
-        public IActionResult Create()
-        {
-            ViewData["MovieID"] = new SelectList(_context.Movie, "MovieID", "MovieID");
-            ViewData["SaleID"] = new SelectList(_context.Set<Sale>(), "SaleID", "SaleID");
-            return View();
-        }
+        //// GET: MovieSales/Create
+        //public IActionResult Create()
+        //{
+        //    ViewData["MovieID"] = new SelectList(_context.Movie, "MovieID", "MovieID");
+        //    ViewData["SaleID"] = new SelectList(_context.Set<Sale>(), "SaleID", "SaleID");
+        //    return View();
+        //}
 
         // POST: MovieSales/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(string SaleID, string MovieID, [Bind("SaleID,MovieID,Quantity")] MovieSale movieSale)
         {
             if (SaleID == null || MovieID == null)
@@ -92,7 +93,10 @@ namespace MovieMonster.Controllers
                         }
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details","Sales",new
+                {
+                     id=SaleID
+                });
             }
             return View(movieSale);
         }
@@ -183,6 +187,25 @@ namespace MovieMonster.Controllers
         private bool MovieSaleExists(string SaleID, string MovieID)
         {
             return _context.MovieSale.Any(e => e.MovieID == MovieID && e.SaleID == SaleID);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public async Task<string> AdvancedSearch([Bind("SaleID,MovieID,Quantity")] MovieSale searchMovieSale)
+        {
+            var result = _context.MovieSale.AsQueryable();
+            if (searchMovieSale != null)
+            {
+                if (searchMovieSale.SaleID != null)
+                    result = result.Where(movieSale => movieSale.SaleID == searchMovieSale.SaleID);
+                if (searchMovieSale.MovieID != null)
+                    result = result.Where(movieSale => movieSale.MovieID == searchMovieSale.MovieID);
+                if (searchMovieSale.Quantity != 0)
+                    result = result.Where(movieSale => movieSale.Quantity == searchMovieSale.Quantity);
+            }
+            var list = await result.ToListAsync();
+            var listJason = Newtonsoft.Json.JsonConvert.SerializeObject(list);
+            return listJason;
         }
     }
 }

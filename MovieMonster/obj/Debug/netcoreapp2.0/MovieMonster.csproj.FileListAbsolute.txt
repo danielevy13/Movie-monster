@@ -10,3 +10,15 @@ C:\Users\daniel\source\repos\MovieMonster\MovieMonster\bin\Debug\netcoreapp2.0\M
 C:\Users\daniel\source\repos\MovieMonster\MovieMonster\obj\Debug\netcoreapp2.0\MovieMonster.dll
 C:\Users\daniel\source\repos\MovieMonster\MovieMonster\obj\Debug\netcoreapp2.0\MovieMonster.pdb
 C:\Users\daniel\source\repos\MovieMonster\MovieMonster\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
+C:\Users\daniel\Documents\GitHub\Movie-monster\MovieMonster\bin\Debug\netcoreapp2.0\MovieMonster.deps.json
+C:\Users\daniel\Documents\GitHub\Movie-monster\MovieMonster\bin\Debug\netcoreapp2.0\MovieMonster.runtimeconfig.json
+C:\Users\daniel\Documents\GitHub\Movie-monster\MovieMonster\bin\Debug\netcoreapp2.0\MovieMonster.runtimeconfig.dev.json
+C:\Users\daniel\Documents\GitHub\Movie-monster\MovieMonster\bin\Debug\netcoreapp2.0\MovieMonster.dll
+C:\Users\daniel\Documents\GitHub\Movie-monster\MovieMonster\bin\Debug\netcoreapp2.0\MovieMonster.pdb
+C:\Users\daniel\Documents\GitHub\Movie-monster\MovieMonster\obj\Debug\netcoreapp2.0\MovieMonster.csprojAssemblyReference.cache
+C:\Users\daniel\Documents\GitHub\Movie-monster\MovieMonster\obj\Debug\netcoreapp2.0\MovieMonster.csproj.CoreCompileInputs.cache
+C:\Users\daniel\Documents\GitHub\Movie-monster\MovieMonster\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
+C:\Users\daniel\Documents\GitHub\Movie-monster\MovieMonster\obj\Debug\netcoreapp2.0\MovieMonster.AssemblyInfoInputs.cache
+C:\Users\daniel\Documents\GitHub\Movie-monster\MovieMonster\obj\Debug\netcoreapp2.0\MovieMonster.AssemblyInfo.cs
+C:\Users\daniel\Documents\GitHub\Movie-monster\MovieMonster\obj\Debug\netcoreapp2.0\MovieMonster.dll
+C:\Users\daniel\Documents\GitHub\Movie-monster\MovieMonster\obj\Debug\netcoreapp2.0\MovieMonster.pdb
