@@ -197,5 +197,26 @@ namespace MovieMonster.Controllers
             var listJason = Newtonsoft.Json.JsonConvert.SerializeObject(list);
             return listJason;
         }
+        //Query the DB to get the top customers
+        public string TopCustomers()
+        {
+            var top5 = (from c in _context.Customer
+                        join s in _context.Sale on c.CustomerID equals s.CustomerID
+                        where s.Purchased == true
+                        select new { c.FirstName, s.Purchased } into newTable
+                        group newTable by new { newTable.FirstName } into finalTable
+                        select new
+                        {
+                            Title = finalTable.Key.FirstName,
+                            Quantity = finalTable.Count(q => q.Purchased)
+                        }
+                                      );
+
+            var resultTableAsArray = top5.ToArray();
+
+            var json = JsonConvert.SerializeObject(resultTableAsArray);
+
+            return json;
+        }
     }
 }

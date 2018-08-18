@@ -165,50 +165,6 @@ namespace MovieMonster.Controllers
 
         /******************MyFunctions*******************/
 
-        // GET: Sales/AddMovieToCart/5
-        //public async Task<IActionResult> AddMovieToCart(string id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var sale = await _context.Sale.FindAsync(id);
-        //    if (sale == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    // ViewData["MovieID"] = new SelectList(_context.Movie, "MovieID", "MovieID");
-        //    return null; //new MovieSalesController(_context).Create(id);
-        //}
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> AddMovieToCart(string saleID, string movieID)
-        //{
-        //    if (saleID == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var sale = await _context.Sale.FindAsync(saleID);
-        //    if (sale == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    if (movieID == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    var movie = await _context.Movie.FindAsync(movieID);
-        //    if (movie == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    //  sale.Movies.Add(movie);
-        //    return View();
-        //}
-
         [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<string> AdvancedSearch([Bind("SaleID,CustomerID,Purchased,TotalPrice")] Sale searchSale)
@@ -243,8 +199,7 @@ namespace MovieMonster.Controllers
             }
             return View("Index", cart);
         }
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
+
         public async Task<IActionResult> Purchase(string id)
         {
             if (id == null)
@@ -275,6 +230,34 @@ namespace MovieMonster.Controllers
                 }
             }
             return RedirectToAction("Index", "Home");
+        }
+        //Direction to the graph view =  /Sales/PieChart
+        public IActionResult PieChart()
+        {
+            return View("~/Views/Graphs/PieChart.cshtml");
+        }
+        // Join And groupBy query result, sent as array to the view by Ajax
+        public JsonResult QuantityJson()
+        {
+            var titleQuantityTable = (from m in _context.Movie
+                                      join ms in _context.MovieSale on m.MovieID equals ms.MovieID
+                                      join s in _context.Sale on ms.SaleID equals s.SaleID
+                                      where ms.Quantity > 0 && s.Purchased == true
+                                      select new { m.Title, ms.Quantity } into newTable
+                                      group newTable by new { newTable.Title } into finalTable
+                                      select new
+                                      {
+                                          Title = finalTable.Key.Title,
+                                          Quantity = finalTable.Sum(q => q.Quantity)
+                                      }
+                                      );
+
+            var resultTableAsArray = titleQuantityTable.ToList();
+
+            //var json = JsonConvert.SerializeObject(resultTableAsArray);
+
+            return Json(resultTableAsArray);
+            
         }
     }
 }
