@@ -526,6 +526,7 @@ namespace MovieMonster.Controllers
                 CustomerID = user.Email
             });
         }
+
         public async Task<IActionResult> UsersCart(string id)
         {
             var user = await _userManager.GetUserAsync(User);

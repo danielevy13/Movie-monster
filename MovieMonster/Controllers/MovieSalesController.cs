@@ -71,6 +71,11 @@ namespace MovieMonster.Controllers
             {
                 if (!MovieSaleExists(SaleID, MovieID))
                 {
+                    if (movieSale.Quantity == 0)
+                        movieSale.Quantity = 1;
+                    var sale = await _context.Sale.FirstOrDefaultAsync(s => s.SaleID == SaleID);
+                    var movie = await _context.Movie.FirstOrDefaultAsync(s => s.MovieID== MovieID);
+                    sale.TotalPrice += (int) movie.Retail;
                     _context.Add(movieSale);
                     await _context.SaveChangesAsync();
                 }

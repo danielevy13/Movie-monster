@@ -11,6 +11,7 @@ using MovieMonster.Models;
 
 namespace MovieMonster.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class SuppliersController : Controller
     {
         private readonly ApplicationDbContext _context;

@@ -2,72 +2,81 @@
     ViewData["Title"] = "About us";
 }
 
-    <style>
-        p1 {
-            font-size: 16px;
-            line-height: 24px;
-            padding: 50px;
+<style>
+    p1 {
+        font-size: 16px;
+        line-height: 24px;
+        padding: 50px;
+    }
+
+    .colums {
+        column-count: 4;
+        column-gap: 30px;
+        column-rule: 4px solid lightblue;
+        column-rule-style: solid;
+        font-size: 16px;
+        line-height: 24px;
+        padding: 50px;
+    }
+
+    h3 {
+        width: 500px;
+        height: 20px;
+        background: grey;
+        transition: width 3s;
+    }
+
+        h3:hover {
+            width: 400px;
         }
-        .colums {
-            column-count: 4;
-            column-gap: 30px;
-            column-rule: 4px solid lightblue;
-            column-rule-style: solid;
-            font-size: 16px;
-            line-height: 24px;
-            padding: 50px;
-        }
-
-    </style>
+</style>
 
 
-    <div>
-        <div id="fb-root"></div>  @*facebook app*@
-        <h1>Welcome to our MovieMonster website!!!</h1>
-        <p class="colums">
-            Western, Comedy, Drama, Horror, Action, Romance,
-            Adventure,Crime,Mystery,Fantasy,Historical,Mystery,Political,Philosophical,
-            Science fiction,Social,Thriller,Animation and many more! you can find it all only on MovieMonster!
-        </p>
-        <h2>Here is a spacial tour at our massive collection!</h2>
+<div>
+    <div id="fb-root"></div>  @*facebook app*@
+    <h3>Welcome to our MovieMonster website!!!</h3>
+    <p class="colums">
+        Western, Comedy, Drama, Horror, Action, Romance,
+        Adventure,Crime,Mystery,Fantasy,Historical,Mystery,Political,Philosophical,
+        Science fiction,Social,Thriller,Animation and many more! you can find it all only on MovieMonster!
+    </p>
+    <h2>Here is a spacial tour at our massive collection!</h2>
 
-        <video controls>
-            <source src="~/assets/Video/MovieMonsterTour.mp4" type="video/mp4" />
-        </video>
+    <video controls>
+        <source src="~/assets/Video/MovieMonsterTour.mp4" type="video/mp4" />
+    </video>
 
-        <script>
-            document.getElementById('vid').play();
-        </script>
+    <script>
+        document.getElementById('vid').play();
+    </script>
 
-        <canvas id="myCanvas" width="1100" height="45" style="border:1px solid #d3d3d3;"></canvas>
+    <canvas id="myCanvas" width="1100" height="45" style="border:1px solid #d3d3d3;"></canvas>
 
-        <script>
-            var c = document.getElementById("myCanvas");
-            var ctx = c.getContext("2d");
+    <script>
+        var c = document.getElementById("myCanvas");
+        var ctx = c.getContext("2d");
 
-            ctx.font = "30px Verdana";
-            // Create gradient
-            var gradient = ctx.createLinearGradient(0, 0, c.width, 0);
-            gradient.addColorStop("0", "black");
-            gradient.addColorStop("1.0", "red");
-            // Fill with gradient
-            ctx.fillStyle = gradient;
-            ctx.fillText("our platform suggests the newest movies at the lowest price avilable!!!", 10, 35);
+        ctx.font = "30px Verdana";
+        // Create gradient
+        var gradient = ctx.createLinearGradient(0, 0, c.width, 0);
+        gradient.addColorStop("0", "black");
+        gradient.addColorStop("1.0", "red");
+        // Fill with gradient
+        ctx.fillStyle = gradient;
+        ctx.fillText("our platform suggests the newest movies at the lowest price avilable!!!", 10, 35);
 
-        </script>
+    </script>
 
-        <p1>Contact us on: <a href="mailto:MovieMonsterManagment">MovieMonsterManagment@gmail.com</a></p1>
+    <p1>Contact us on: <a href="mailto:MovieMonsterManagment">MovieMonsterManagment@gmail.com</a></p1>
 
-        <script>
-            (function (d, s, id) {
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) return;
-                js = d.createElement(s); js.id = id;
-                js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.1&appId=2113997168673768';
-                fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));</script>
-        <div class="fb-share-button" data-href="https://i.pinimg.com/originals/39/49/ec/3949ec65a283b5c980d57b87394d3bb7.jpg" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fhttps://i.pinimg.com/originals/39/49/ec/3949ec65a283b5c980d57b87394d3bb7.jpg%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+    <script>
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.1&appId=2113997168673768';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+    <div class="fb-share-button" data-href="https://i.pinimg.com/originals/39/49/ec/3949ec65a283b5c980d57b87394d3bb7.jpg" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fhttps://i.pinimg.com/originals/39/49/ec/3949ec65a283b5c980d57b87394d3bb7.jpg%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
 
-    </div>
-
-   
+</div>

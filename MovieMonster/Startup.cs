@@ -90,6 +90,7 @@ namespace MovieMonster
             ApplicationUser user = await UserManager.FindByEmailAsync("MovieMonsterManagement@gmail.com");
             var User = new ApplicationUser();
             await UserManager.AddToRoleAsync(user, "Admin");
+            await UserManager.AddToRoleAsync(user, "User");
         }
     }
 }

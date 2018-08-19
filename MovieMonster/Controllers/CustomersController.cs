@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MovieMonster.Data;
 using MovieMonster.Models;
+using Newtonsoft.Json;
 
 namespace MovieMonster.Controllers
 {
+    
     public class CustomersController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -30,6 +32,7 @@ namespace MovieMonster.Controllers
         }
 
         // GET: Customers/Details/5
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> Details(string id
             )
         {
@@ -47,19 +50,20 @@ namespace MovieMonster.Controllers
 
             return View(customer);
         }
-/*
-        // GET: Customers/Create
-        public IActionResult Create(string UserID)
-        {
+        /*
+                // GET: Customers/Create
+                public IActionResult Create(string UserID)
+                {
 
-            return View();
-        }
-        */
+                    return View();
+                }
+                */
         // POST: Customers/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-      //  [HttpPost]
-      //  [ValidateAntiForgeryToken]
+        //  [HttpPost]
+        //  [ValidateAntiForgeryToken]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> Create([Bind("CustomerID,UserID,FirstName,LastName,BirthDate,PhoneNumber,Gender,State,City,StreetName,ApartmentNumber,ZipCode")] Customer customer)
         {
             if (ModelState.IsValid)
@@ -71,6 +75,7 @@ namespace MovieMonster.Controllers
             return View(customer);
         }
         // GET: Customers/Edit/5
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -91,6 +96,7 @@ namespace MovieMonster.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> Edit(string id, [Bind("CustomerID,UserID,FirstName,LastName,BirthDate,PhoneNumber,Gender,State,City,StreetName,ApartmentNumber,ZipCode")] Customer customer)
         {
             if (id != customer.CustomerID)
@@ -122,6 +128,7 @@ namespace MovieMonster.Controllers
         }
 
         // GET: Customers/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -142,6 +149,7 @@ namespace MovieMonster.Controllers
         // POST: Customers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             var customer = await _context.Customer.FindAsync(id);
@@ -156,6 +164,7 @@ namespace MovieMonster.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<string> Search(string searchTxt)
         {
             var customers = await _context.Customer.Where(customer => customer.FirstName.Contains(searchTxt)).ToListAsync();
@@ -197,8 +206,10 @@ namespace MovieMonster.Controllers
             var listJason = Newtonsoft.Json.JsonConvert.SerializeObject(list);
             return listJason;
         }
+
         //Query the DB to get the top customers
-        public string TopCustomers()
+        [Authorize(Roles = "Admin")]
+        public JsonResult TopCustomers()
         {
             var top5 = (from c in _context.Customer
                         join s in _context.Sale on c.CustomerID equals s.CustomerID
@@ -210,13 +221,9 @@ namespace MovieMonster.Controllers
                             Title = finalTable.Key.FirstName,
                             Quantity = finalTable.Count(q => q.Purchased)
                         }
-                                      );
-
-            var resultTableAsArray = top5.ToArray();
-
-            var json = JsonConvert.SerializeObject(resultTableAsArray);
-
-            return json;
+                        );
+            var resultTableAsList = top5.ToList();
+            return Json(resultTableAsList);
         }
     }
 }

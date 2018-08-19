@@ -74,13 +74,11 @@
         document.getElementById('map'), mapOptions);
     geocoder.geocode({ 'address': modelAdress }, function (results, status) {
         if (status == 'OK') {
-            alert("OK");
             map.setCenter(results[0].geometry.location);
                 marker = new google.maps.Marker({
                 map: map,
                 position: results[0].geometry.location
             });
-            alert("Marker set.")
         }
         else {
             alert('couldnt locate customer location');
@@ -93,5 +91,11 @@
 
 <div>
     <a asp-action="Edit" asp-route-id="@Model.CustomerID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    @if (User.Identity.IsAuthenticated)
+    {
+        if (User.IsInRole("Admin"))
+        {
+        <a asp-action="Index">Back to List</a>
+        }
+    }
 </div>

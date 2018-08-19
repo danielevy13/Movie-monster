@@ -6,7 +6,7 @@ function headTable(titlesList) {
     $.each(titlesList, function (index, title) {
         head = head.concat('<th>' + title + '</th>');
     });
-    head = head.concat('</tr></thead>');
+    head = head.concat('<th></th></tr></thead>');
     return head;
 }
 
@@ -56,15 +56,15 @@ function MoviesAdvancedSearch() {
     var title = $("#Title").val();
     var actors = $("#Actors").val();
     var year = $("#Year").val();
-    ToAjax('AdvancedSearch', 'Movies', MovieListToHtml, { "Title": title, "Actors": actors, "year": year });
+    ToAjax('AdvancedSearch', 'Movies', MovieListToHtml, { "Title": title, "Actors": actors, "YearRelease": year });
 }
 
 //write the movie table with movies from the list
 function MovieListToHtml(moviesList) {
     var moviesTable = '<table class="table">';
-    moviesTable = moviesTable.concat(headTable(["Title", "Genere", "UnitsInStock", "ReleaseDate", "Actors", "MinAge", "Language", "UnitPrice"]));
+    moviesTable = moviesTable.concat(headTable(["Title", "Genere", "UnitsInStock", "YearRelease", "Actors", "Rated", "Language", "Retail"]));
     $.each(moviesList, function (index, movie) {
-        moviesTable = moviesTable.concat('<tr><td>' + movie.Title + '</td>' + '<td>' + movie.Genere + '</td>' + '<td>' + movie.UnitsInStock + '</td>' + '<td>' + movie.ReleaseDate + '</td>' + '<td>' + movie.Actors + '</td>' + '<td>' + movie.MinAge + '</td>' + '<td>' + movie.Language + '</td>' + '<td>' + movie.UnitPrice.Wholesale + '</td></tr>');
+        moviesTable = moviesTable.concat('<tr><td>' + movie.Title + '</td>' + '<td>' + movie.Genere + '</td>' + '<td>' + movie.UnitsInStock + '</td>' + '<td>' + movie.YearRelease + '</td>' + '<td>' + movie.Actors + '</td>' + '<td>' + movie.Rated + '</td>' + '<td>' + movie.Language + '<td>' + movie.Retail + '<a href="/Movies/Details/' + movie.MovieID + '">Details</a>' + '</td></tr>'); // <a href="/Movies/Details/3f9fad83-de9a-401c-95d0-b80802a6a01f">Details</a>
     });
     moviesTable = moviesTable.concat('</tbody></table>');
     ChangeBodyContainerView(moviesTable, '/Movies')

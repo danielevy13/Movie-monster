@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,7 @@ using Newtonsoft.Json;
 
 namespace MovieMonster.Controllers
 {
+    
     public class MoviesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -50,11 +52,18 @@ namespace MovieMonster.Controllers
                 return NotFound();
             }
             ImdbEntity imdbMovie = OmdbFetcher(movie.Title);
-            ViewData["Poster"] = imdbMovie.Poster;
+            if (imdbMovie == null || imdbMovie.Poster == "N/A")
+            {
+                ViewData["Poster"] = "/assets/img/MovieMonsterLogo.jpg";
+            }
+            else
+            {
+                ViewData["Poster"] = imdbMovie.Poster;
+            }
             ViewData["Title"] = new SelectList(_context.Movie, "Title", "Title");
             return View(movie);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: Movies/Create
         public IActionResult Create()
         {
@@ -64,6 +73,7 @@ namespace MovieMonster.Controllers
         // POST: Movies/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("MovieID,Title,Genere,UnitsInStock,YearRelease,Actors,Rated,Language,Wholesale,Retail")] Movie movie)
@@ -89,7 +99,7 @@ namespace MovieMonster.Controllers
             }
             return View(movie);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: Movies/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
@@ -105,10 +115,10 @@ namespace MovieMonster.Controllers
             }
             return View(movie);
         }
-
         // POST: Movies/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string id, [Bind("MovieID,Title,Genere,UnitsInStock,YearRelease,Actors,Rated,Language,Wholesale,Retail")] Movie movie)
@@ -140,8 +150,8 @@ namespace MovieMonster.Controllers
             }
             return View(movie);
         }
-
         // GET: Movies/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -160,6 +170,7 @@ namespace MovieMonster.Controllers
         }
 
         // POST: Movies/Delete/5
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
@@ -241,12 +252,11 @@ namespace MovieMonster.Controllers
             var listJason = Newtonsoft.Json.JsonConvert.SerializeObject(list);
             return listJason;
         }
-
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> AddMovieToCart(string CustomerID, string MovieID)
         {
             var customer = await _context.Customer.Include(u => u.Sales).FirstOrDefaultAsync(u => u.CustomerID == CustomerID);
             var cart = new Sale();
-            var sales = await _context.Sale.ToListAsync();
             foreach (var sale in customer.Sales)
             {
                 if (sale.Purchased == false)
@@ -254,11 +264,13 @@ namespace MovieMonster.Controllers
             }
             if (cart.SaleID != null)
             {
+
                 return RedirectToAction("Create", "MovieSales", new
                 {
                     SaleID=cart.SaleID, MovieID=MovieID
                 });
             }
+            var sales = await _context.Sale.ToListAsync();
             var SaleID = sales.Count + 1;
             return RedirectToAction("Create", "Sales", new
             {
@@ -269,6 +281,5 @@ namespace MovieMonster.Controllers
 
             });
         }
-
     }
 }

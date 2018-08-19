@@ -1,83 +1,97 @@
 ﻿@model IEnumerable<MovieMonster.Models.Movie>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Movies";
 }
 
-<h2>Index</h2>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Genere)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UnitsInStock)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.YearRelease)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Actors)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rated)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Language)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Retail)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Wholesale)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Genere)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UnitsInStock)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.YearRelease)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Actors)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rated)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Language)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Retail)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Wholesale)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.MovieID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.MovieID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.MovieID">Delete</a>
-            </td>
-        </tr>
+<h2>Movies</h2>
+        <p>
+@if (User.Identity.IsAuthenticated)
+{
+    if (User.IsInRole("Admin"))
+    {
+            <a asp-action="Create">Create New</a>
+    }
 }
-    </tbody>
-</table>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Genere)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnitsInStock)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.YearRelease)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Actors)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Rated)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Language)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Retail)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Wholesale)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Genere)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UnitsInStock)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.YearRelease)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Actors)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Rated)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Language)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Retail)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Wholesale)
+                        </td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@item.MovieID">Details</a>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                if (User.IsInRole("Admin"))
+                                {
+
+                                <a asp-action="Edit" asp-route-id="@item.MovieID">Edit</a>
+                                <a asp-action="Delete" ifp-route-id="@item.MovieID">Delete</a>
+                                }
+
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>

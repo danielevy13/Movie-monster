@@ -40,6 +40,7 @@
                     {
                         if (User.IsInRole("Admin"))
                         {
+                            <li role="presentation" class="nav-item"><a href="/Sales/Statistics" class="nav-link">stats</a></li>
                             <li role="presentation" class="nav-item"><a onclick="CustomersAdvancedSearchPage()" class="nav-link">CustomersAdvancedSearch</a></li>
                             <li role="presentation" class="nav-item"><a onclick="SalesAdvancedSearchPage()" class="nav-link">SalesAdvancedSearch</a></li>
                             <li role="presentation" class="nav-item"><a onclick="SuppliersAdvancedSearchPage()" class="nav-link">SuppliersAdvancedSearchPage</a></li>
@@ -50,7 +51,7 @@
                     <div class="search__wrapper">
                         <input type="text" id="searchTxt" name="searchTxt" placeholder="Search for..." class="search__field"></input>
                         <button id="search-btn" type="submit" class="fa fa-search search__icon" onclick="Search()"></button>
-                        <a onclick="AdvancedSearchPage()">AdvancedSearch</a>
+                        <a onclick="MoviesAdvancedSearchPage()">AdvancedSearch</a>
                     </div>
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
