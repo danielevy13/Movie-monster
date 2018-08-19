@@ -35,3 +35,4 @@ C:\Users\mulik\Documents\GitHub\Movie-monster\MovieMonster\obj\Debug\netcoreapp2
 C:\Users\mulik\Documents\GitHub\Movie-monster\MovieMonster\obj\Debug\netcoreapp2.0\MovieMonster.pdb
 C:\Users\daniel\Documents\GitHub\Movie-monster\MovieMonster\bin\Debug\netcoreapp2.0\Accord.dll.config
 C:\Users\daniel\Documents\GitHub\Movie-monster\MovieMonster\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
+C:\Users\mulik\Documents\GitHub\Movie-monster\MovieMonster\bin\Debug\netcoreapp2.0\Accord.dll.config
